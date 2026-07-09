@@ -1,0 +1,281 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-08T05:15:00.000Z",
+  "title": "Design System: StadiYums",
+  "extensions": {
+    "colorMeta": {
+      "navy": {
+        "role": "primary",
+        "displayName": "Navy",
+        "canonical": "oklch(22% 0.045 252)",
+        "tonalRamp": [
+          "oklch(15% 0.035 252)",
+          "oklch(18% 0.04 252)",
+          "oklch(22% 0.045 252)",
+          "oklch(28% 0.04 252)",
+          "oklch(35% 0.035 252)",
+          "oklch(45% 0.03 252)",
+          "oklch(60% 0.02 252)",
+          "oklch(75% 0.012 252)"
+        ]
+      },
+      "navy-deep": {
+        "role": "primary",
+        "displayName": "Navy Deep",
+        "canonical": "oklch(17% 0.04 252)",
+        "tonalRamp": [
+          "oklch(10% 0.03 252)",
+          "oklch(13% 0.035 252)",
+          "oklch(17% 0.04 252)",
+          "oklch(22% 0.038 252)",
+          "oklch(30% 0.032 252)",
+          "oklch(40% 0.025 252)",
+          "oklch(55% 0.018 252)",
+          "oklch(70% 0.01 252)"
+        ]
+      },
+      "orange": {
+        "role": "secondary",
+        "displayName": "Orange",
+        "canonical": "oklch(62% 0.22 38)",
+        "tonalRamp": [
+          "oklch(35% 0.14 38)",
+          "oklch(45% 0.18 38)",
+          "oklch(55% 0.21 38)",
+          "oklch(62% 0.22 38)",
+          "oklch(70% 0.19 38)",
+          "oklch(78% 0.15 38)",
+          "oklch(86% 0.1 38)",
+          "oklch(93% 0.05 38)"
+        ]
+      },
+      "orange-dim": {
+        "role": "secondary",
+        "displayName": "Orange Dim",
+        "canonical": "oklch(58% 0.21 38)",
+        "tonalRamp": [
+          "oklch(32% 0.13 38)",
+          "oklch(42% 0.17 38)",
+          "oklch(52% 0.2 38)",
+          "oklch(58% 0.21 38)",
+          "oklch(66% 0.18 38)",
+          "oklch(74% 0.14 38)",
+          "oklch(82% 0.09 38)",
+          "oklch(90% 0.04 38)"
+        ]
+      },
+      "green": {
+        "role": "tertiary",
+        "displayName": "Green",
+        "canonical": "oklch(48% 0.14 142)",
+        "tonalRamp": [
+          "oklch(25% 0.08 142)",
+          "oklch(32% 0.1 142)",
+          "oklch(40% 0.12 142)",
+          "oklch(48% 0.14 142)",
+          "oklch(56% 0.13 142)",
+          "oklch(65% 0.11 142)",
+          "oklch(75% 0.08 142)",
+          "oklch(88% 0.04 142)"
+        ]
+      },
+      "cream": {
+        "role": "neutral",
+        "displayName": "Cream",
+        "canonical": "oklch(96% 0.008 85)",
+        "tonalRamp": [
+          "oklch(25% 0.02 85)",
+          "oklch(40% 0.025 85)",
+          "oklch(55% 0.02 85)",
+          "oklch(70% 0.015 85)",
+          "oklch(82% 0.012 85)",
+          "oklch(90% 0.01 85)",
+          "oklch(96% 0.008 85)",
+          "oklch(99% 0.004 85)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(21% 0.005 85)",
+        "tonalRamp": [
+          "oklch(15% 0.004 85)",
+          "oklch(18% 0.005 85)",
+          "oklch(21% 0.005 85)",
+          "oklch(30% 0.008 85)",
+          "oklch(42% 0.01 85)",
+          "oklch(55% 0.012 85)",
+          "oklch(70% 0.01 85)",
+          "oklch(85% 0.008 85)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Brand wordmark and tracker headlines. Archivo Black only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Primary screen titles at 24px."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Menu item names and card titles."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Descriptions, cart copy, order rows. Inter 14px."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Section labels, field labels, badges. Space Mono uppercase."
+      }
+    },
+    "shadows": [
+      {
+        "name": "stepper-focus-ring",
+        "value": "0 0 0 5px rgba(253,73,10,0.15)",
+        "purpose": "Current order step dot only."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-standard",
+        "value": "ease",
+        "purpose": "Default for background and color transitions at 0.15s to 0.3s."
+      },
+      {
+        "name": "cart-slide",
+        "value": "transform 0.25s ease",
+        "purpose": "Fixed cart bar enter/exit."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "560px" },
+      { "name": "xs", "value": "400px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Checkout Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Primary action in the fixed orange cart bar.",
+      "html": "<button class=\"ds-btn-primary\">Checkout</button>",
+      "css": ".ds-btn-primary { background: #fff; color: #E44309; padding: 12px 22px; border: none; border-radius: 8px; font-family: Inter, sans-serif; font-weight: 700; font-size: 14.5px; cursor: pointer; transition: background 0.15s ease; } .ds-btn-primary:hover { background: #F5F3EF; } .ds-btn-primary:focus-visible { outline: 2px solid #0B1D33; outline-offset: 2px; }"
+    },
+    {
+      "name": "Advance Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Runner action to move an order to the next status.",
+      "html": "<button class=\"ds-btn-secondary\">Mark on the way</button>",
+      "css": ".ds-btn-secondary { background: #0B1D33; color: #F5F3EF; padding: 10px 16px; border: none; border-radius: 8px; font-family: Inter, sans-serif; font-weight: 700; font-size: 13px; cursor: pointer; white-space: nowrap; transition: background 0.15s ease; } .ds-btn-secondary:hover { background: #071527; } .ds-btn-secondary:focus-visible { outline: 2px solid #FD490A; outline-offset: 2px; } .ds-btn-secondary:disabled { background: #D8D2C4; color: #A89F8C; cursor: default; }"
+    },
+    {
+      "name": "Tab Active",
+      "kind": "nav",
+      "refersTo": "tab-active",
+      "description": "Active tab in the fan/runner view switcher.",
+      "html": "<button class=\"ds-tab-active\"><span class=\"ds-tab-icon\">📱</span> Fan app</button>",
+      "css": ".ds-tab-active { background: #FD490A; color: #fff; padding: 10px 14px; border: none; border-radius: 7px; font-family: Inter, sans-serif; font-weight: 600; font-size: 13.5px; display: inline-flex; align-items: center; gap: 7px; cursor: pointer; } .ds-tab-icon { font-size: 16px; line-height: 1; }"
+    },
+    {
+      "name": "Seat Input",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Aisle and seat number entry for fan ordering.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Aisle</span><input class=\"ds-input\" type=\"text\" placeholder=\"12\" value=\"12\" /></label>",
+      "css": ".ds-field { display: block; } .ds-field-label { display: block; font-family: 'Space Mono', monospace; font-size: 11.5px; color: #6B6459; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em; } .ds-input { width: 100%; padding: 13px 12px; border-radius: 8px; border: 1.5px solid rgba(11,29,51,0.1); background: #F5F3EF; font-family: 'Space Mono', monospace; font-size: 16px; font-weight: 700; color: #0B1D33; } .ds-input::placeholder { color: #A89F8C; font-weight: 400; } .ds-input:focus-visible { outline: 2px solid #FD490A; outline-offset: 1px; border-color: #FD490A; }"
+    },
+    {
+      "name": "Menu Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Concession item with price and quantity controls.",
+      "html": "<article class=\"ds-menu-card\"><div class=\"ds-menu-icon\"></div><div class=\"ds-menu-info\"><h3>Popcorn</h3><p class=\"ds-menu-price\">$8.00</p></div><div class=\"ds-qty\"><button type=\"button\">−</button><span>1</span><button type=\"button\">+</button></div></article>",
+      "css": ".ds-menu-card { background: #fff; border: 1px solid rgba(11,29,51,0.1); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px; } .ds-menu-icon { width: 100%; aspect-ratio: 1.5/1; background: #F5F3EF; border-radius: 9px; } .ds-menu-info h3 { font-family: Inter, sans-serif; font-size: 15px; font-weight: 600; margin: 0 0 2px; color: #1A1A1A; } .ds-menu-price { font-family: 'Space Mono', monospace; font-size: 13.5px; color: #0B1D33; font-weight: 700; margin: 0; } .ds-qty { display: flex; align-items: center; justify-content: space-between; gap: 10px; } .ds-qty button { width: 30px; height: 30px; border-radius: 50%; background: #F5F3EF; border: 1.5px solid rgba(11,29,51,0.1); color: #0B1D33; font-size: 16px; font-weight: 700; cursor: pointer; } .ds-qty span { font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; min-width: 16px; text-align: center; }"
+    },
+    {
+      "name": "Status Badge",
+      "kind": "chip",
+      "refersTo": "status-badge",
+      "description": "Order status pill for runner queue cards.",
+      "html": "<span class=\"ds-status-badge ds-status-preparing\">Preparing</span>",
+      "css": ".ds-status-badge { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 5px 10px; border-radius: 100px; letter-spacing: 0.03em; display: inline-block; } .ds-status-preparing { background: rgba(253,73,10,0.15); color: #E44309; } .ds-status-on-the-way { background: rgba(11,29,51,0.1); color: #0B1D33; } .ds-status-delivered { background: rgba(48,124,39,0.12); color: #307C27; }"
+    },
+    {
+      "name": "Section Label",
+      "kind": "custom",
+      "refersTo": "label",
+      "description": "Orange uppercase mono label above form sections.",
+      "html": "<p class=\"ds-section-label\">What can we bring you?</p>",
+      "css": ".ds-section-label { font-family: 'Space Mono', monospace; font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: #FD490A; font-weight: 700; margin: 0 0 10px; }"
+    },
+    {
+      "name": "Tagline Chip",
+      "kind": "chip",
+      "refersTo": "status-badge",
+      "description": "Header tagline pill: More game. Less lines.",
+      "html": "<span class=\"ds-tagline\">More game. Less lines.</span>",
+      "css": ".ds-tagline { font-family: 'Space Mono', monospace; font-size: 11.5px; letter-spacing: 0.06em; color: #FD490A; border: 1px solid rgba(253,73,10,0.4); border-radius: 100px; padding: 5px 12px; text-transform: uppercase; display: inline-block; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The End Zone Rush",
+    "overview": "StadiYums looks like the last two minutes of a close game: navy conviction, orange urgency, numbers you can read at arm's length in daylight. The UI is a scoreboard-first mobile tool, not a marketing site. Surfaces stay light because fans use this outdoors in direct sun. Depth comes from tonal blocks, not drop shadows.",
+    "keyCharacteristics": [
+      "Light theme optimized for bright stadium glare",
+      "Orange as the action color",
+      "Navy as the authority color",
+      "Monospace for operational data",
+      "Flat elevation with borders and tints",
+      "Scoreboard density and chunky tap targets"
+    ],
+    "rules": [
+      {
+        "name": "The Orange Clock Rule",
+        "body": "Orange appears on every screen where the user must act now. If orange is decorative, remove it.",
+        "section": "colors"
+      },
+      {
+        "name": "The Sunlight Rule",
+        "body": "Never place low-contrast gray text on cream for anything operational. Seat numbers, prices, and status must pass a squint test in direct sun.",
+        "section": "colors"
+      },
+      {
+        "name": "The Ticket Stub Rule",
+        "body": "Anything a runner or fan needs to act on is Space Mono, weight 700 where numeric.",
+        "section": "typography"
+      },
+      {
+        "name": "The Signage Rule",
+        "body": "Archivo Black is for headings only. Never use it for body paragraphs or form labels.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Bowl Rule",
+        "body": "Surfaces sit flush. If you need hierarchy, change the background color or add a border. Do not add drop shadows to cards or menu items.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep the page background cream and cards white for sun readability.",
+      "Do use Space Mono for seats, prices, order IDs, ETAs, and status badges.",
+      "Do use orange only where the user must act or pay attention now.",
+      "Do size tap targets at 30px minimum.",
+      "Do keep transitions short (0.15s to 0.3s ease) on color and transform only.",
+      "Do show fan and runner flows with equal visual weight."
+    ],
+    "donts": [
+      "Don't use generic SaaS landing patterns: purple gradients, hero metric blocks, identical icon-card feature grids, or modern startup chrome.",
+      "Don't clone fast-food delivery app UI (DoorDash/Uber Eats layouts, cart patterns, or typography).",
+      "Don't add drop shadows to cards, menu items, or buttons.",
+      "Don't use gradient text, glassmorphism, or decorative blur.",
+      "Don't use Archivo Black for body copy or form labels.",
+      "Don't add 4px colored left stripes on new cards or list items.",
+      "Don't rely on motion to communicate status."
+    ]
+  }
+}
