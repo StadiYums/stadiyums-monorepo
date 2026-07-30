@@ -1,17 +1,16 @@
 import { defineConfig, globalIgnores } from "eslint/config";
-import nextVitals from "eslint-config-next/core-web-vitals";
-import nextTs from "eslint-config-next/typescript";
 import convexPlugin from "@convex-dev/eslint-plugin";
 
+/** Root ESLint covers Convex only. App lint configs live under apps/*. */
 const eslintConfig = defineConfig([
-  ...nextVitals,
-  ...nextTs,
   ...convexPlugin.configs.recommended,
   globalIgnores([
     ".next/**",
+    "apps/**",
+    "packages/**",
     "out/**",
     "build/**",
-    "next-env.d.ts",
+    "node_modules/**",
     "convex/_generated/**",
   ]),
 ]);
