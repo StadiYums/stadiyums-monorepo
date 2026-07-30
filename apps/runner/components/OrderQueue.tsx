@@ -1,14 +1,25 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { IconArmchair } from "@tabler/icons-react";
 import { useMutation, useQuery } from "convex/react";
+import { Button, StatusBadge, elapsed } from "@stadiyums/ui";
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
-import { elapsed } from "@/lib/format";
-import { getMenuItem, nextStatusLabel, statusLabel } from "@/lib/menu";
-import { StatusBadge } from "@/components/shared/ui/StatusBadge";
-import { Button } from "@/components/shared/ui/Button";
+import { getMenuItem, nextStatusLabel, statusLabel } from "../lib/menu";
+
+function borderAccent(status: string): string {
+  switch (status) {
+    case "preparing":
+      return "border-l-orange";
+    case "on_the_way":
+    case "pickedUp":
+      return "border-l-navy";
+    case "delivered":
+      return "border-l-green opacity-60";
+    default:
+      return "border-l-orange";
+  }
+}
 
 export function OrderQueue() {
   const queue = useQuery(api.orders.listQueue);
@@ -23,13 +34,17 @@ export function OrderQueue() {
   }, []);
 
   if (!queue) {
-    return <p className="py-5 text-center text-[13.5px] text-label-muted">Loading queue…</p>;
+    return (
+      <p className="py-5 text-center text-[15px] font-medium text-label-muted">
+        Loading queue…
+      </p>
+    );
   }
 
   if (queue.length === 0) {
     return (
-      <p className="py-5 text-center text-[13.5px] text-label-muted">
-        Queue is clear - no open orders right now.
+      <p className="py-5 text-center text-[15px] font-medium text-label-muted">
+        Queue is clear — no open orders right now.
       </p>
     );
   }
@@ -52,11 +67,11 @@ export function OrderQueue() {
 
   return (
     <div className="space-y-3">
-      {advanceError && (
+      {advanceError ? (
         <p role="alert" className="text-center text-sm font-medium text-red-600">
           {advanceError}
         </p>
-      )}
+      ) : null}
       {queue.map((order) => {
         const itemsSummary = order.items
           .map((item) => {
@@ -68,30 +83,21 @@ export function OrderQueue() {
         return (
           <div
             key={order._id}
-            className={`flex flex-wrap items-center justify-between gap-3.5 rounded-md border border-line border-l-4 bg-surface-white px-[18px] py-4 ${
-              order.status === "preparing"
-                ? "border-l-orange"
-                : order.status === "on_the_way"
-                  ? "border-l-navy"
-                  : order.status === "delivered"
-                    ? "border-l-green opacity-60"
-                    : "border-l-orange"
-            }`}
+            className={`flex flex-wrap items-center justify-between gap-3.5 rounded-md border-2 border-navy border-l-4 bg-surface-white px-[18px] py-4 ${borderAccent(order.status)}`}
           >
             <div className="mono min-w-[130px] text-[15px] font-bold text-navy">
-              <IconArmchair size={16} className="mr-1 inline" aria-hidden />
-              Aisle {order.aisle} - Seat {order.seat}
+              Aisle {order.aisle} · Seat {order.seat}
             </div>
-            <div className="min-w-[160px] flex-1 text-[13px] text-[#5a5348]">
+            <div className="min-w-[160px] flex-1 text-[13px] font-medium text-ink">
               {itemsSummary}
             </div>
-            <div className="mono min-w-20 text-[11.5px] text-label-muted">
+            <div className="mono min-w-20 text-[11.5px] font-bold text-label-muted">
               {elapsed(order.placedAt, now)}
             </div>
             <StatusBadge status={order.status} label={statusLabel(order.status)} />
             <Button
               variant="advance"
-              className="w-full min-[561px]:w-auto"
+              className="w-full min-h-12 min-[561px]:w-auto"
               disabled={advancingId === order._id}
               onClick={() => void handleAdvance(order._id)}
             >

@@ -19,7 +19,10 @@ export function RunnerStats() {
     );
   }
 
-  const avgTime = stats.deliveredCount > 0 ? "6m" : "-";
+  const avgTime =
+    stats.avgDeliveryMinutes != null
+      ? `${Math.round(stats.avgDeliveryMinutes)}m`
+      : "-";
 
   const chips = [
     { value: stats.openCount, label: "Open orders" },
@@ -32,10 +35,10 @@ export function RunnerStats() {
       {chips.map((chip) => (
         <div
           key={chip.label}
-          className="min-w-[130px] flex-1 rounded-md bg-navy px-4 py-3.5 text-cream"
+          className="min-w-[130px] flex-1 rounded-md border-2 border-navy bg-navy px-4 py-3.5 text-cream"
         >
           <div className="mono text-[22px] font-bold text-orange">{chip.value}</div>
-          <div className="text-[11px] uppercase tracking-[0.04em] text-cream/65">
+          <div className="text-[11px] font-bold uppercase tracking-[0.04em] text-cream/65">
             {chip.label}
           </div>
         </div>
