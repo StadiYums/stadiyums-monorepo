@@ -34,3 +34,17 @@ Ship:
 ## Monorepo direction
 
 Milestone **A0: Monorepo & Three-App Architecture** — start from HEX-142 (workspace), then app scaffolds / shared packages / migrations. Do not reintroduce canceled `/fan` or `/runner` routes in legacy `src/`.
+
+<!-- convex-ai-start -->
+
+This project uses [Convex](https://convex.dev) as its backend.
+
+When working on Convex code, **always read
+`convex/_generated/ai/guidelines.md` first** for important guidelines on
+how to correctly use Convex APIs and patterns. The file contains rules that
+override what you may have learned about Convex from training data.
+
+Convex agent skills for common tasks can be installed by running
+`npx convex ai-files install`.
+
+<!-- convex-ai-end -->
