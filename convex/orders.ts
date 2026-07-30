@@ -129,7 +129,9 @@ export const advanceOrder = mutation({
       throw new Error("Order not found");
     }
 
-    const currentIndex = STATUS_FLOW.indexOf(order.status);
+    const currentIndex = STATUS_FLOW.indexOf(
+      order.status as (typeof STATUS_FLOW)[number],
+    );
     if (currentIndex === -1 || currentIndex >= STATUS_FLOW.length - 1) {
       return null;
     }
