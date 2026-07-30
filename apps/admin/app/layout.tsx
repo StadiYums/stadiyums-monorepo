@@ -5,6 +5,9 @@ import {
   ThemeProvider,
   VendorToggle,
 } from "@stadiyums/ui";
+import { AdminSidebar } from "../components/AdminSidebar";
+import { AuthGate } from "../components/AuthGate";
+import { AdminProvider } from "../providers/AdminProvider";
 import "./globals.css";
 
 const archivoBlack = Archivo_Black({
@@ -37,12 +40,19 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full" suppressHydrationWarning>
       <body
-        className={`${archivoBlack.variable} ${inter.variable} ${spaceMono.variable} min-h-full font-body antialiased`}
+        className={`${archivoBlack.variable} ${inter.variable} ${spaceMono.variable} min-h-full bg-cream font-body text-ink antialiased`}
       >
         <ConvexClientProvider>
           <ThemeProvider>
-            {children}
-            <VendorToggle />
+            <AdminProvider>
+              <AuthGate>
+                <div className="flex min-h-full flex-col md:flex-row">
+                  <AdminSidebar />
+                  {children}
+                </div>
+              </AuthGate>
+              <VendorToggle />
+            </AdminProvider>
           </ThemeProvider>
         </ConvexClientProvider>
       </body>
