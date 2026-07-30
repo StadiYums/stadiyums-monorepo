@@ -9,6 +9,8 @@
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
     "test": "node --experimental-strip-types --test convex/lib/**/*.test.ts",
+    "test:visual": "playwright test",
+    "test:visual:update": "playwright test --update-snapshots",
     "dev:landing": "pnpm --filter @stadiyums/landing dev",
     "dev:fan": "pnpm --filter @stadiyums/fan dev",
     "dev:runner": "pnpm --filter @stadiyums/runner dev",
@@ -22,6 +24,7 @@
   },
   "devDependencies": {
     "@convex-dev/eslint-plugin": "^1.1.0",
+    "@playwright/test": "1.62.0",
     "eslint": "^9",
     "turbo": "^2.5.4",
     "typescript": "^5"
