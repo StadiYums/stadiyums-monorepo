@@ -14,11 +14,18 @@ const APPS = [
     filter: "@stadiyums/runner",
   },
   {
-    name: "Admin",
+    name: "System admin",
     port: 3002,
     href: "http://localhost:3002",
     blurb: "Stadium ops console scaffold",
-    filter: "@stadiyums/admin",
+    filter: "@stadiyums/system-admin",
+  },
+  {
+    name: "Vendor",
+    port: 3004,
+    href: "http://localhost:3004",
+    blurb: "Menus, runners, readiness, order desk, and reporting",
+    filter: "@stadiyums/vendor",
   },
 ] as const;
 
@@ -33,7 +40,7 @@ export default function LandingPage() {
       </h1>
       <p className="mt-4 max-w-xl text-base font-medium leading-snug text-ink">
         The unified DemoApp tab switcher is gone. Run each product surface as its
-        own app — fan, runner, and admin share one Convex backend.
+        own app — fan, runner, system admin, and vendor share one Convex backend.
       </p>
 
       <ul className="mt-10 space-y-4">

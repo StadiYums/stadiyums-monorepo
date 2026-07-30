@@ -24,8 +24,8 @@ export default function LoginPage() {
 
   return (
     <AdminShell
-      title="Admin sign in"
-      description="Scaffold gate only — stadium admin auth lands in a later ticket. Any email with @ works."
+      title="System admin sign in"
+      description="Scaffold gate only — stadium account authentication lands in a later ticket. Any email with @ works."
     >
       <Card className="mt-8 max-w-md">
         <SectionLabel>Email</SectionLabel>
@@ -46,7 +46,7 @@ export default function LoginPage() {
           <p className="mt-3 text-sm text-orange">Enter a valid email address.</p>
         ) : null}
         <Button className="mt-5 w-full" type="button" onClick={submit}>
-          Enter console
+          Enter system-admin console
         </Button>
       </Card>
     </AdminShell>

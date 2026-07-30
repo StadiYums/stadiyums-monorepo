@@ -21,7 +21,7 @@ const spaceMono = Space_Mono({
 
 export const metadata: Metadata = {
   title: "StadiYums — Dev landing",
-  description: "Jump into the fan, runner, or admin app",
+  description: "Jump into the fan, runner, system-admin, or vendor app",
 };
 
 export default function RootLayout({

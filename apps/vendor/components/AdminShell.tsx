@@ -6,7 +6,7 @@ type AdminShellProps = {
   children?: ReactNode;
 };
 
-/** Wide ops content frame — same tokens, denser layout (HEX-174). */
+/** Wide vendor content frame — same tokens, denser layout (HEX-174 / HEX-175). */
 export function AdminShell({ title, description, children }: AdminShellProps) {
   return (
     <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-8 lg:px-10">

@@ -25,7 +25,7 @@ export function AdminSidebar() {
     <aside className="flex w-full flex-col border-b border-line bg-navy text-cream md:min-h-full md:w-56 md:shrink-0 md:border-b-0 md:border-r">
       <div className="px-5 py-5">
         <p className="mono text-[11px] font-bold uppercase tracking-[0.1em] text-cream/70">
-          StadiYums Admin
+          StadiYums System Admin
         </p>
         <p className="mt-2 font-display text-lg leading-tight">Ops console</p>
         {session ? (
@@ -34,7 +34,7 @@ export function AdminSidebar() {
           </p>
         ) : null}
       </div>
-      <nav aria-label="Admin" className="flex-1 px-3 pb-4">
+      <nav aria-label="System admin" className="flex-1 px-3 pb-4">
         <ul className="flex gap-1 overflow-x-auto md:flex-col md:gap-1">
           {NAV_ITEMS.map((item) => {
             const active =
