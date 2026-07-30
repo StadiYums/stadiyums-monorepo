@@ -12,10 +12,12 @@ import { VendorToggle } from "@/components/shared/VendorToggle";
 import { ConvexOfflineBanner } from "@/components/shared/ConvexOfflineBanner";
 import { useTheme } from "@/providers/ThemeProvider";
 import { useDemo } from "@/providers/DemoProvider";
+import { useCartCount } from "@/components/fan/CartBar";
 
 export function DemoApp() {
   const { activeTab } = useDemo();
   const { theme } = useTheme();
+  const cartCount = useCartCount();
   const ensureSeeded = useMutation(api.demo.ensureSeeded);
   const [backendOffline, setBackendOffline] = useState(false);
 
@@ -40,7 +42,7 @@ export function DemoApp() {
           Powered by <span className="text-navy/70">StadiYums</span>
         </footer>
       )}
-      <VendorToggle />
+      <VendorToggle elevate={activeTab === "fan" && cartCount > 0} />
       <CartBar />
     </>
   );
