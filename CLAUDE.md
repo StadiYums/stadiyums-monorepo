@@ -24,6 +24,7 @@ After implementation (required):
 1. Run **atomic Karma commits** — smallest sensible Conventional Commits (`type(scope): summary`), one logical change each; include `HEX-NNN`.
 2. **Push** the ticket branch to `origin` so Linear’s GitHub integration tracks it (`git push -u origin HEAD` on first push).
 3. Do not leave finished work sitting uncommitted or unpushed.
+4. Open/update the PR with title `HEX-NNN: …` and body magic word `Fixes HEX-NNN` — GitHub’s auto title from the branch often breaks Linear linking (`hex-142` → `hex 142`).
 
 Ship:
 

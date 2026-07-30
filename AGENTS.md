@@ -26,7 +26,8 @@ Rules:
 2. Never mix multiple `HEX-*` issues on one branch.
 3. Never commit ticket work to `main`.
 4. Push the branch so GitHub ↔ Linear can attach the PR/commits to the issue.
-5. Open one PR per issue; reference the identifier in the PR title (e.g. `HEX-142: …`).
+5. Open one PR per issue; reference the identifier in the **PR title** as `HEX-NNN: …` (required for Linear auto-link). Do not rely on GitHub’s auto-generated title from the branch slug — it often turns `hex-142` into `hex 142` and Linear will not match it.
+6. Also include a magic word in the PR body (`Fixes HEX-NNN` / `Closes HEX-NNN`) so linking and status automations fire even if branch matching fails.
 
 ### Commits (atomic Karma / Conventional Commits)
 
