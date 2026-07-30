@@ -6,10 +6,10 @@ type AdminShellProps = {
   children?: ReactNode;
 };
 
-/** Wide system-admin content frame — same tokens, denser layout (HEX-174 / HEX-175). */
+/** Content frame inside the shared full-viewport operational workspace. */
 export function AdminShell({ title, description, children }: AdminShellProps) {
   return (
-    <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-8 lg:px-10">
+    <section className="w-full">
       <h1 className="font-display text-[1.75rem] leading-tight text-navy md:text-[1.875rem]">
         {title}
       </h1>
@@ -19,6 +19,6 @@ export function AdminShell({ title, description, children }: AdminShellProps) {
         </p>
       ) : null}
       {children}
-    </main>
+    </section>
   );
 }
