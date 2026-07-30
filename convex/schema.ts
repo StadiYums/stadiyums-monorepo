@@ -54,6 +54,34 @@ export const shiftValidator = v.object({
   isAvailable: v.boolean(),
 });
 
+/** Catalog domain — L2 (HEX-117). */
+export const menuModifierValidator = v.object({
+  id: v.string(),
+  label: v.string(),
+  options: v.array(v.string()),
+});
+
+export const vendorValidator = v.object({
+  _id: v.id("vendors"),
+  _creationTime: v.number(),
+  zoneId: v.id("zones"),
+  name: v.string(),
+  location: v.string(),
+  prepTimeMinutes: v.number(),
+  isActive: v.boolean(),
+});
+
+export const menuItemValidator = v.object({
+  _id: v.id("menuItems"),
+  _creationTime: v.number(),
+  vendorId: v.id("vendors"),
+  name: v.string(),
+  description: v.string(),
+  price: v.number(),
+  imageUrl: v.optional(v.string()),
+  modifiers: v.array(menuModifierValidator),
+});
+
 export default defineSchema({
   orders: defineTable({
     orderNumber: v.number(),
@@ -96,4 +124,21 @@ export default defineSchema({
   })
     .index("by_runner_active", ["runnerId", "isAvailable"])
     .index("by_zone", ["zoneId"]),
+
+  vendors: defineTable({
+    zoneId: v.id("zones"),
+    name: v.string(),
+    location: v.string(),
+    prepTimeMinutes: v.number(),
+    isActive: v.boolean(),
+  }).index("by_zone", ["zoneId"]),
+
+  menuItems: defineTable({
+    vendorId: v.id("vendors"),
+    name: v.string(),
+    description: v.string(),
+    price: v.number(),
+    imageUrl: v.optional(v.string()),
+    modifiers: v.array(menuModifierValidator),
+  }).index("by_vendor", ["vendorId"]),
 });
