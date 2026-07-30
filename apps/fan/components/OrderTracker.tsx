@@ -1,30 +1,13 @@
 "use client";
 
-import {
-  IconCheck,
-  IconCircleCheck,
-  IconClock,
-  IconReceipt,
-  IconSoup,
-  IconWalk,
-} from "@tabler/icons-react";
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
-import { money } from "@/lib/format";
-import { getMenuItem, ORDER_STEPS } from "@/lib/menu";
-import { Card, SectionLabel } from "@/components/shared/ui/Card";
-import { Button } from "@/components/shared/ui/Button";
-import { useDemo } from "@/providers/DemoProvider";
-
-const STEP_ICONS = {
-  receipt: IconReceipt,
-  soup: IconSoup,
-  walk: IconWalk,
-  check: IconCheck,
-};
+import { Button, Card, SectionLabel, money } from "@stadiyums/ui";
+import { getMenuItem, ORDER_STEPS } from "../lib/menu";
+import { useFan } from "../providers/FanProvider";
 
 export function OrderTracker() {
-  const { activeOrderId, setActiveOrderId } = useDemo();
+  const { activeOrderId, setActiveOrderId } = useFan();
   const order = useQuery(
     api.orders.getOrder,
     activeOrderId ? { orderId: activeOrderId } : "skip",
@@ -36,9 +19,13 @@ export function OrderTracker() {
 
   if (order === null) {
     return (
-      <Card>
+      <Card className="mt-8">
         <p className="text-sm text-label-muted">Order not found.</p>
-        <Button className="mt-4 w-full" variant="secondary" onClick={() => setActiveOrderId(null)}>
+        <Button
+          className="mt-4 w-full"
+          variant="secondary"
+          onClick={() => setActiveOrderId(null)}
+        >
           Order again
         </Button>
       </Card>
@@ -61,12 +48,12 @@ export function OrderTracker() {
           : "Your order just hit the kitchen queue.";
 
   return (
-    <Card>
+    <Card className="mt-8">
       <div className="mb-7 flex flex-wrap items-center justify-between gap-3">
         <div>
           <SectionLabel>Order status</SectionLabel>
           <h2 className="text-2xl text-navy">
-            Aisle {order.aisle} - Seat {order.seat}
+            Aisle {order.aisle} · Seat {order.seat}
           </h2>
         </div>
         <span className="mono text-xs text-label-muted">#SY-{order.orderNumber}</span>
@@ -74,7 +61,6 @@ export function OrderTracker() {
 
       <div className="mb-8 flex">
         {ORDER_STEPS.map((step, index) => {
-          const Icon = STEP_ICONS[step.icon as keyof typeof STEP_ICONS];
           const done = index < stepIdx;
           const current = index === stepIdx;
           return (
@@ -87,7 +73,7 @@ export function OrderTracker() {
                 />
               )}
               <div
-                className={`relative z-[2] mx-auto mb-2.5 flex h-[34px] w-[34px] items-center justify-center rounded-full text-base transition-colors duration-300 ${
+                className={`relative z-[2] mx-auto mb-2.5 flex h-[34px] w-[34px] items-center justify-center rounded-full text-sm font-bold transition-colors duration-300 ${
                   done
                     ? "bg-green text-white"
                     : current
@@ -95,7 +81,7 @@ export function OrderTracker() {
                       : "bg-[var(--step-inactive)] text-[var(--step-inactive-text)]"
                 }`}
               >
-                {index <= stepIdx ? <IconCheck size={16} /> : <Icon size={16} />}
+                {index <= stepIdx ? "✓" : index + 1}
               </div>
               <span className="mono text-[11px] font-bold uppercase tracking-[0.03em] text-label-muted">
                 {step.label}
@@ -106,18 +92,13 @@ export function OrderTracker() {
       </div>
 
       <div className="mb-6 flex items-center gap-3 rounded-md border border-[var(--green-border)] bg-[var(--green-tint)] px-[18px] py-4">
-        {order.status === "delivered" ? (
-          <IconCircleCheck size={22} className="text-green" />
-        ) : (
-          <IconClock size={22} className="text-green" />
-        )}
         <div>
           <b className="mono text-green">
             {order.status === "delivered"
               ? "Delivered"
               : `~${Math.max(1, 8 - stepIdx * 2)} min`}
           </b>{" "}
-          - {etaText}
+          · {etaText}
         </div>
       </div>
 

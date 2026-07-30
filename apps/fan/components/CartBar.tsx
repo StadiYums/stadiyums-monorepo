@@ -3,20 +3,12 @@
 import { useState } from "react";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
-import { money } from "@/lib/format";
-import { getMenuItem, MENU } from "@/lib/menu";
-import { Button } from "@/components/shared/ui/Button";
-import { useDemo } from "@/providers/DemoProvider";
+import { Button, money } from "@stadiyums/ui";
+import { getMenuItem } from "../lib/menu";
+import { useFan } from "../providers/FanProvider";
 
 export function CartBar() {
-  const {
-    cart,
-    ticket,
-    activeTab,
-    setActiveOrderId,
-    setSeatValidationError,
-    setCart,
-  } = useDemo();
+  const { cart, ticket, setActiveOrderId, setSeatValidationError, setCart } = useFan();
   const placeOrder = useMutation(api.orders.placeOrder);
   const [isPlacing, setIsPlacing] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -27,7 +19,7 @@ export function CartBar() {
     return sum + (item?.price ?? 0) * qty;
   }, 0);
 
-  const visible = activeTab === "fan" && count > 0;
+  const visible = count > 0;
 
   const handlePlaceOrder = async () => {
     if (!ticket.aisle.trim() || !ticket.seat.trim()) {
@@ -68,7 +60,7 @@ export function CartBar() {
         visible ? "translate-y-0" : "translate-y-[110%]"
       }`}
     >
-      <div className="mx-auto max-w-[880px] px-5">
+      <div className="mx-auto max-w-[520px] px-5">
         {error && (
           <p role="alert" className="mb-2 text-center text-sm font-medium text-white/95">
             {error}
@@ -92,14 +84,14 @@ export function CartBar() {
 }
 
 export function useCartCount() {
-  const { cart } = useDemo();
+  const { cart } = useFan();
   return Object.values(cart).reduce((sum, qty) => sum + qty, 0);
 }
 
 export function useCartTotal() {
-  const { cart } = useDemo();
+  const { cart } = useFan();
   return Object.entries(cart).reduce((sum, [id, qty]) => {
-    const item = MENU.find((menuItem) => menuItem.id === id);
+    const item = getMenuItem(id);
     return sum + (item?.price ?? 0) * qty;
   }, 0);
 }

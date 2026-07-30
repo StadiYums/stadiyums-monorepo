@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FanShell } from "../components/FanShell";
-import { SeatSetupForm } from "../components/SeatSetupForm";
+import { SeatForm } from "../components/SeatForm";
 import { useFan } from "../providers/FanProvider";
 
 export default function HomePage() {
@@ -28,7 +28,7 @@ export default function HomePage() {
       title="Find your seat"
       description="Confirm aisle and seat before browsing vendors. Full seat localization lands in F1."
     >
-      <SeatSetupForm />
+      <SeatForm />
       {hasSeat ? (
         <p className="mt-4 text-center text-sm text-ink/70">
           Seat already set.{" "}

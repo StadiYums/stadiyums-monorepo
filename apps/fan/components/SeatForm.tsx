@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { Button, Card, Input, SectionLabel } from "@stadiyums/ui";
 import { useFan } from "../providers/FanProvider";
 
-export function SeatSetupForm() {
+export function SeatForm() {
   const router = useRouter();
   const {
     ticket,
@@ -55,7 +55,12 @@ export function SeatSetupForm() {
       </div>
       {seatValidationError ? (
         <p className="mt-3 text-sm text-orange">Aisle and seat are required.</p>
-      ) : null}
+      ) : (
+        <div className="mono mt-4 flex items-center gap-2.5 rounded-md bg-navy px-4 py-3.5 text-sm text-cream">
+          We&apos;ll deliver straight to Aisle {ticket.aisle || "—"}, Seat{" "}
+          {ticket.seat || "—"}.
+        </div>
+      )}
       <Button className="mt-5 w-full" type="button" onClick={continueToOrder}>
         Continue to order
       </Button>

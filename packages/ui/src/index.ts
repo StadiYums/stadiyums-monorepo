@@ -5,6 +5,8 @@ export { StatusBadge } from "./components/StatusBadge";
 export { MenuIcon } from "./components/MenuIcon";
 export { ConvexOfflineBanner } from "./components/ConvexOfflineBanner";
 export { VendorToggle } from "./components/VendorToggle";
+export { BrandHeader } from "./components/BrandHeader";
+export { AppShell } from "./components/AppShell";
 
 export { ConvexClientProvider } from "./providers/ConvexClientProvider";
 export { ThemeProvider, useTheme } from "./providers/ThemeProvider";

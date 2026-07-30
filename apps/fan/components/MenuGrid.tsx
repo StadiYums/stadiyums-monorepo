@@ -1,13 +1,11 @@
 "use client";
 
-import { MENU } from "@/lib/menu";
-import { money } from "@/lib/format";
-import { MenuIcon } from "@/components/shared/MenuIcon";
-import { SectionLabel } from "@/components/shared/ui/Card";
-import { useDemo } from "@/providers/DemoProvider";
+import { MenuIcon, SectionLabel, money } from "@stadiyums/ui";
+import { MENU } from "../lib/menu";
+import { useFan } from "../providers/FanProvider";
 
 export function MenuGrid() {
-  const { cart, setCart } = useDemo();
+  const { cart, setCart } = useFan();
 
   const changeQty = (id: string, delta: number) => {
     setCart((current) => {

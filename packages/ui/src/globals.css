@@ -1,16 +1,34 @@
 :root {
+  /* Reference palette — stadiyums.shop (HEX-174) */
   --navy: #0b1d33;
+  --navy-2: #132a47;
+  --navy-soft: #1e3a5f;
   --navy-deep: #071527;
   --orange: #fd490a;
+  --orange-2: #ff7440;
   --orange-dim: #e44309;
   --green: #307c27;
-  --cream: #f5f3ef;
+  --green-2: #3f9a33;
+  --cream: #f7f5f0;
   --ink: #1a1a1a;
-  --line: rgba(11, 29, 51, 0.1);
-  --label-muted: #6b6459;
-  --placeholder: #a89f8c;
+  --line: #e4e0d8;
+  --label-muted: #6b7280;
+  --placeholder: #9ca3af;
   --surface-white: #ffffff;
-  --input-bg: #f5f3ef;
+  --input-bg: #f7f5f0;
+  --radius: 16px;
+
+  /* Semantic aliases */
+  --color-surface: var(--surface-white);
+  --color-surface-page: var(--cream);
+  --color-foreground: var(--ink);
+  --color-accent: var(--orange);
+  --color-accent-strong: var(--orange-dim);
+  --color-success: var(--green);
+  --color-border: var(--line);
+  --color-muted: var(--label-muted);
+  --color-focus-ring: rgba(253, 73, 10, 0.35);
+
   --accent-ring: rgba(253, 73, 10, 0.15);
   --accent-border: rgba(253, 73, 10, 0.4);
   --accent-tint-10: rgba(253, 73, 10, 0.1);
@@ -24,10 +42,14 @@
 
 @theme inline {
   --color-navy: var(--navy);
+  --color-navy-2: var(--navy-2);
+  --color-navy-soft: var(--navy-soft);
   --color-navy-deep: var(--navy-deep);
   --color-orange: var(--orange);
+  --color-orange-2: var(--orange-2);
   --color-orange-dim: var(--orange-dim);
   --color-green: var(--green);
+  --color-green-2: var(--green-2);
   --color-cream: var(--cream);
   --color-ink: var(--ink);
   --color-line: var(--line);
@@ -40,10 +62,10 @@
   --font-display: var(--font-archivo-black);
   --font-body: var(--font-inter);
   --font-mono: var(--font-space-mono);
-  --radius-sm: 8px;
-  --radius-md: 10px;
-  --radius-lg: 12px;
-  --radius-xl: 14px;
+  --radius-sm: 10px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 16px;
   --radius-pill: 100px;
 }
 
@@ -55,7 +77,8 @@ body {
   margin: 0;
   background: var(--cream);
   color: var(--ink);
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.5;
 }
 
@@ -67,7 +90,12 @@ h3 {
 }
 
 .mono {
-  font-family: var(--font-space-mono), monospace;
+  font-family: var(--font-space-mono), ui-monospace, monospace;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
 }
 
 @media (prefers-reduced-motion: reduce) {
