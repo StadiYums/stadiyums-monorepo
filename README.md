@@ -66,7 +66,15 @@ pnpm dev
 | `pnpm build --filter=@stadiyums/fan` | Build one app |
 | `pnpm lint` | Lint all packages |
 | `pnpm typecheck` | TypeScript check all packages |
+| `pnpm test:visual` | Run responsive shell geometry and screenshot regression tests |
+| `pnpm test:visual:update` | Intentionally update visual baselines after human review |
 | `npx convex dev` | Convex dev deployment + type generation |
+
+### Responsive shell tests
+
+The Playwright suite in `tests/visual/` checks the four app shells at the eight agreed viewport sizes. It asserts viewport-height contracts, prevents page-level horizontal overflow, distinguishes the fan/runner mobile frame from the system-admin/vendor WorkspaceShell, and captures deterministic screenshots.
+
+Run `pnpm exec playwright install chromium` once on a new machine, then run `pnpm test:visual`. Baseline changes require `pnpm test:visual:update`, visual review at the changed viewport, and an intentional commit of the updated snapshots. CI runs the same suite with fresh app servers.
 
 ## Project docs
 
