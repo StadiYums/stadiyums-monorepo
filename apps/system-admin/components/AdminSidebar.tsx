@@ -12,7 +12,7 @@ const NAV_ITEMS = [
   { href: "/settings", label: "Settings" },
 ] as const;
 
-/** Desktop/tablet sidebar for the five admin sections. */
+/** Desktop/tablet rail for system-admin navigation. */
 export function AdminSidebar() {
   const pathname = usePathname();
   const { session, logout } = useAdmin();
@@ -22,7 +22,7 @@ export function AdminSidebar() {
   }
 
   return (
-    <aside className="flex w-full flex-col border-b border-line bg-navy text-cream md:min-h-full md:w-56 md:shrink-0 md:border-b-0 md:border-r">
+    <div className="flex h-full min-h-20 w-full flex-col bg-navy text-cream">
       <div className="px-5 py-5">
         <p className="mono text-[11px] font-bold uppercase tracking-[0.1em] text-cream/70">
           StadiYums System Admin
@@ -70,6 +70,6 @@ export function AdminSidebar() {
           </button>
         </div>
       ) : null}
-    </aside>
+    </div>
   );
 }

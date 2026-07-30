@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Archivo_Black, Inter, Space_Mono } from "next/font/google";
 import {
-  AppShell,
   ConvexClientProvider,
   ThemeProvider,
   VendorToggle,
+  WorkspaceShell,
 } from "@stadiyums/ui";
 import { AdminSidebar } from "../components/AdminSidebar";
 import { AuthGate } from "../components/AuthGate";
@@ -47,12 +47,9 @@ export default function RootLayout({
           <ThemeProvider>
             <AdminProvider>
               <AuthGate>
-                <AppShell width="wide">
-                  <div className="flex min-h-full flex-col md:flex-row">
-                    <AdminSidebar />
-                    {children}
-                  </div>
-                </AppShell>
+                <WorkspaceShell sidebar={<AdminSidebar />} sidebarLabel="System admin navigation">
+                  {children}
+                </WorkspaceShell>
               </AuthGate>
               <VendorToggle />
             </AdminProvider>
