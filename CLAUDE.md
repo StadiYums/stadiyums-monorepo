@@ -25,10 +25,12 @@ After implementation (required):
 2. **Push** the ticket branch to `origin` so Linear’s GitHub integration tracks it (`git push -u origin HEAD` on first push).
 3. Do not leave finished work sitting uncommitted or unpushed.
 4. Open/update the PR with title `HEX-NNN: …` and body magic word `Fixes HEX-NNN` — GitHub’s auto title from the branch often breaks Linear linking (`hex-142` → `hex 142`).
+5. When the PR is created (opened): move the issue to **In Review**.
 
 Ship:
 
 - Open a PR from the ticket branch; title includes `HEX-NNN`.
+- Move the issue to **In Review** when that PR is opened.
 - Mark Done only after merge and acceptance criteria are satisfied.
 
 ## Monorepo direction

@@ -51,7 +51,7 @@ Rules:
 
 When starting work: move the issue to **In Progress** (and assign yourself if unassigned).
 
-When the PR is open: leave status as In Progress / In Review per team convention.
+When the PR is created (opened): move the issue to **In Review**.
 
 When merged and acceptance criteria are met: mark the issue **Done**.
 
