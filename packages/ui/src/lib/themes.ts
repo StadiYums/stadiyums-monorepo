@@ -34,8 +34,8 @@ export const THEMES: Record<ThemeId, Theme> = {
     colors: {
       navy: "#0B1D33",
       navyDeep: "#071527",
-      cream: "#F5F3EF",
-      inputBg: "#F5F3EF",
+      cream: "#F7F5F0",
+      inputBg: "#F7F5F0",
       accent: "#FD490A",
       accentDim: "#E44309",
       accentRing: "rgba(253,73,10,0.15)",
@@ -56,7 +56,7 @@ export const THEMES: Record<ThemeId, Theme> = {
     colors: {
       navy: "#231F20",
       navyDeep: "#1A1718",
-      cream: "#F5F3EF",
+      cream: "#F7F5F0",
       inputBg: "#FFFFFF",
       accent: "#D10E47",
       accentDim: "#B00C3D",

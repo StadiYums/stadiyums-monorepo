@@ -7,7 +7,7 @@ type FanShellProps = {
   children?: ReactNode;
 };
 
-/** Mobile-first page chrome shared by fan route placeholders. */
+/** Mobile-first fan chrome — ~520px content width (HEX-174). */
 export function FanShell({
   eyebrow = "StadiYums",
   title,
@@ -15,15 +15,15 @@ export function FanShell({
   children,
 }: FanShellProps) {
   return (
-    <main className="mx-auto min-h-full w-full max-w-[40rem] px-5 py-8 pb-24">
+    <main className="mx-auto min-h-full w-full max-w-[520px] px-4 pb-[calc(6rem+env(safe-area-inset-bottom))] pt-[max(1.5rem,env(safe-area-inset-top))]">
       <p className="mono text-[11.5px] font-bold uppercase tracking-[0.08em] text-label-muted">
         {eyebrow}
       </p>
-      <h1 className="mt-2 font-display text-[1.75rem] leading-tight text-navy sm:text-[2rem]">
+      <h1 className="mt-2 font-display text-[1.75rem] leading-tight text-navy sm:text-[1.875rem]">
         {title}
       </h1>
       {description ? (
-        <p className="mt-3 max-w-prose text-sm leading-relaxed text-ink/80">
+        <p className="mt-2 max-w-prose text-[13px] leading-relaxed text-label-muted">
           {description}
         </p>
       ) : null}

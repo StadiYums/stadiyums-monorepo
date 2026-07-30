@@ -7,7 +7,7 @@ type RunnerShellProps = {
   children?: ReactNode;
 };
 
-/** High-contrast outdoor-readable chrome for runner routes. */
+/** Outdoor-readable runner chrome — ~520px, large hierarchy (HEX-174). */
 export function RunnerShell({
   eyebrow = "Runner",
   title,
@@ -15,15 +15,15 @@ export function RunnerShell({
   children,
 }: RunnerShellProps) {
   return (
-    <main className="mx-auto min-h-full w-full max-w-[40rem] px-5 pb-28 pt-8">
+    <main className="mx-auto min-h-full w-full max-w-[520px] px-4 pb-[calc(7rem+env(safe-area-inset-bottom))] pt-[max(1.5rem,env(safe-area-inset-top))]">
       <p className="mono text-[12px] font-bold uppercase tracking-[0.1em] text-navy">
         {eyebrow}
       </p>
-      <h1 className="mt-2 font-display text-[2rem] leading-none text-navy sm:text-[2.25rem]">
+      <h1 className="mt-2 font-display text-[1.875rem] leading-none text-navy sm:text-[2rem]">
         {title}
       </h1>
       {description ? (
-        <p className="mt-3 max-w-prose text-base font-medium leading-snug text-ink">
+        <p className="mt-2 max-w-prose text-[15px] font-semibold leading-snug text-ink">
           {description}
         </p>
       ) : null}
