@@ -13,6 +13,7 @@
     "dev:admin": "pnpm --filter @stadiyums/admin dev"
   },
   "dependencies": {
+    "@stadiyums/types": "workspace:*",
     "@stadiyums/ui": "workspace:*",
     "convex": "^1.32.0"
   },

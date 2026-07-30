@@ -1,12 +1,13 @@
-export type MenuItemId =
-  | "popcorn"
-  | "crackerjack"
-  | "drink"
-  | "pretzel"
-  | "hotdog"
-  | "burger";
+import type { MenuItemId, OrderStatus } from "@stadiyums/types";
+import {
+  FAN_TRACKER_STEPS,
+  ORDER_STATUS_LABELS,
+} from "@stadiyums/types";
 
-export type MenuItem = {
+export type { MenuItemId, OrderStatus };
+export type { MenuItem } from "@stadiyums/types";
+
+export type MenuItemLocal = {
   id: MenuItemId;
   name: string;
   desc: string;
@@ -14,7 +15,7 @@ export type MenuItem = {
   icon: MenuItemId;
 };
 
-export const MENU: MenuItem[] = [
+export const MENU: MenuItemLocal[] = [
   {
     id: "popcorn",
     name: "Popcorn",
@@ -59,30 +60,34 @@ export const MENU: MenuItem[] = [
   },
 ];
 
-export function getMenuItem(id: string): MenuItem | undefined {
+export function getMenuItem(id: string): MenuItemLocal | undefined {
   return MENU.find((item) => item.id === id);
 }
 
-export const ORDER_STEPS = [
-  { key: "placed" as const, label: "Ordered", icon: "receipt" },
-  { key: "preparing" as const, label: "Preparing", icon: "soup" },
-  { key: "on_the_way" as const, label: "On the way", icon: "walk" },
-  { key: "delivered" as const, label: "Delivered", icon: "check" },
-];
-
-export type OrderStatus = (typeof ORDER_STEPS)[number]["key"];
+/** Fan tracker steps — shared SSOT from @stadiyums/types (HEX-141). */
+export const ORDER_STEPS = FAN_TRACKER_STEPS.map((key) => ({
+  key,
+  label: ORDER_STATUS_LABELS[key],
+}));
 
 export function statusLabel(status: OrderStatus): string {
-  return ORDER_STEPS.find((step) => step.key === status)?.label ?? status;
+  return ORDER_STATUS_LABELS[status] ?? status;
 }
 
 export function nextStatusLabel(status: OrderStatus): string {
   switch (status) {
     case "placed":
+    case "vendorAccepted":
       return "Start preparing";
     case "preparing":
-      return "Send to seat";
-    case "on_the_way":
+      return "Mark ready";
+    case "readyForPickup":
+    case "runnerAssigned":
+    case "atVendor":
+      return "Confirm pickup";
+    case "pickedUp":
+      return "Arrived at section";
+    case "atSection":
       return "Mark delivered";
     default:
       return "Advance";

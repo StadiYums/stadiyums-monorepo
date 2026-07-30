@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@stadiyums/types':
+        specifier: workspace:*
+        version: link:packages/types
       '@stadiyums/ui':
         specifier: workspace:*
         version: link:packages/ui
