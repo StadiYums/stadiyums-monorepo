@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import type { MenuItemId } from "@stadiyums/types";
 import { Button, Card, SectionLabel } from "@stadiyums/ui";
 import { FanShell } from "../../components/FanShell";
 import { useFan } from "../../providers/FanProvider";
@@ -11,6 +12,8 @@ export default function OrderPage() {
   const router = useRouter();
   const { activeOrderId, hasSeat, ticket, cart } = useFan();
   const cartCount = Object.values(cart).reduce((sum, qty) => sum + qty, 0);
+  const cartIds = Object.keys(cart) as MenuItemId[];
+
 
   useEffect(() => {
     if (activeOrderId) {
@@ -49,7 +52,9 @@ export default function OrderPage() {
       <Card className="mt-4">
         <SectionLabel>Marketplace</SectionLabel>
         <p className="mt-2 text-sm text-ink/80">
-          Vendor grid and menu screens land in F2. Cart items in session: {cartCount}.
+          Vendor grid and menu screens land in F2. Cart items in session:{" "}
+          {cartCount}
+          {cartIds.length > 0 ? ` (${cartIds.join(", ")})` : ""}.
         </p>
         <div className="mt-5 flex flex-col gap-3 sm:flex-row">
           <Button

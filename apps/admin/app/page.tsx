@@ -1,5 +1,6 @@
 "use client";
 
+import { ORDER_STATUS_LABELS } from "@stadiyums/types";
 import { Card, SectionLabel } from "@stadiyums/ui";
 import { AdminShell } from "../components/AdminShell";
 
@@ -16,7 +17,7 @@ export default function DashboardPage() {
             No live feed wired yet. This panel will list all open orders across vendors.
           </p>
           <p className="mt-4 mono text-[11.5px] font-bold uppercase tracking-[0.08em] text-label-muted">
-            Open · 0
+            Open · 0 · labels {Object.keys(ORDER_STATUS_LABELS).length}
           </p>
         </Card>
         <Card>
