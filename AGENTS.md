@@ -61,7 +61,7 @@ Use the Hexacomb Linear MCP (`plugin-linear-linear` / Hexacomb workspace) for St
 
 ### Architecture note
 
-Route-only fan/runner scaffolds inside legacy `src/` are canceled. Product UI lives under `apps/fan`, `apps/runner`, and `apps/admin`. Local jump links live in `apps/landing` (`:3003`).
+Route-only fan/runner scaffolds inside legacy `src/` are canceled. Product UI lives under `apps/fan`, `apps/runner`, `apps/system-admin`, and `apps/vendor`. Local jump links live in `apps/landing` (`:3003`); vendor uses `:3004` in local development to avoid that reserved port.
 
 <!-- convex-ai-start -->
 

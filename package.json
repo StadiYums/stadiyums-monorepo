@@ -12,7 +12,8 @@
     "dev:landing": "pnpm --filter @stadiyums/landing dev",
     "dev:fan": "pnpm --filter @stadiyums/fan dev",
     "dev:runner": "pnpm --filter @stadiyums/runner dev",
-    "dev:admin": "pnpm --filter @stadiyums/admin dev"
+    "dev:system-admin": "pnpm --filter @stadiyums/system-admin dev",
+    "dev:vendor": "pnpm --filter @stadiyums/vendor dev"
   },
   "dependencies": {
     "@stadiyums/types": "workspace:*",

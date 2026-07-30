@@ -29,8 +29,8 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "StadiYums — Admin",
-  description: "Stadium ops console scaffold",
+  title: "StadiYums — Vendor",
+  description: "Vendor operations and order desk console",
 };
 
 export default function RootLayout({
