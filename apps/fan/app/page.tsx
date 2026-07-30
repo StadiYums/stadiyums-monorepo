@@ -1,26 +1,45 @@
-import { Button, Card, SectionLabel } from "@stadiyums/ui";
+"use client";
+
+import { useEffect } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { FanShell } from "../components/FanShell";
+import { SeatSetupForm } from "../components/SeatSetupForm";
+import { useFan } from "../providers/FanProvider";
 
 export default function HomePage() {
+  const router = useRouter();
+  const { activeOrderId, hasSeat } = useFan();
+
+  useEffect(() => {
+    if (activeOrderId) {
+      router.replace("/tracker");
+    }
+  }, [activeOrderId, router]);
+
+  if (activeOrderId) {
+    return (
+      <FanShell title="Loading…" description="Opening your live order tracker." />
+    );
+  }
+
   return (
-    <main className="mx-auto max-w-[40rem] px-5 py-10">
-      <p className="mono text-[11.5px] font-bold uppercase tracking-[0.08em] text-label-muted">
-        StadiYums
-      </p>
-      <h1 className="mt-2 text-[2rem] text-navy">Fan app</h1>
-      <p className="mt-3 text-sm text-ink/80">
-        Shared design system via <code className="mono text-[13px]">@stadiyums/ui</code>.
-        Product UI lands in HEX-144 / HEX-147.
-      </p>
-      <Card className="mt-8">
-        <SectionLabel>Design tokens</SectionLabel>
-        <p className="text-sm text-ink/80">
-          Navy, orange, and cream render from the shared package. Use Grizzlies mode
-          (bottom-left) to verify theme switching.
+    <FanShell
+      title="Find your seat"
+      description="Confirm aisle and seat before browsing vendors. Full seat localization lands in F1."
+    >
+      <SeatSetupForm />
+      {hasSeat ? (
+        <p className="mt-4 text-center text-sm text-ink/70">
+          Seat already set.{" "}
+          <Link
+            href="/order"
+            className="font-semibold text-orange-dim underline-offset-2 hover:underline"
+          >
+            Continue to order
+          </Link>
         </p>
-        <Button className="mt-4" type="button">
-          Primary button
-        </Button>
-      </Card>
-    </main>
+      ) : null}
+    </FanShell>
   );
 }

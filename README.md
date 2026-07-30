@@ -36,8 +36,13 @@ Legacy demo UI remains under `src/` until migration tickets (HEX-147 / HEX-148) 
 ```bash
 pnpm install
 
-# Terminal 1 — Convex backend (creates .env.local with NEXT_PUBLIC_CONVEX_URL)
+# Terminal 1 — Convex backend (creates repo-root .env.local with NEXT_PUBLIC_CONVEX_URL)
 npx convex dev
+
+# Point each Next app at the root env (Next only auto-loads .env* from the app dir)
+ln -sfn ../../.env.local apps/fan/.env.local
+ln -sfn ../../.env.local apps/runner/.env.local
+ln -sfn ../../.env.local apps/admin/.env.local
 
 # Terminal 2 — all apps via Turbo
 pnpm dev

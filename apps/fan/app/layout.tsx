@@ -5,6 +5,7 @@ import {
   ThemeProvider,
   VendorToggle,
 } from "@stadiyums/ui";
+import { FanProvider } from "../providers/FanProvider";
 import "./globals.css";
 
 const archivoBlack = Archivo_Black({
@@ -37,11 +38,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full" suppressHydrationWarning>
       <body
-        className={`${archivoBlack.variable} ${inter.variable} ${spaceMono.variable} min-h-full font-body antialiased`}
+        className={`${archivoBlack.variable} ${inter.variable} ${spaceMono.variable} min-h-full bg-cream font-body text-ink antialiased`}
       >
         <ConvexClientProvider>
           <ThemeProvider>
-            {children}
+            <FanProvider>{children}</FanProvider>
             <VendorToggle />
           </ThemeProvider>
         </ConvexClientProvider>
