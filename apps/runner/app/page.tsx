@@ -1,6 +1,6 @@
 "use client";
 
-import { ORDER_STATUSES } from "@stadiyums/types";
+import { FAN_TRACKER_STEPS, ORDER_STATUS_LABELS } from "@stadiyums/types";
 import { Button, Card, SectionLabel } from "@stadiyums/ui";
 import { RunnerShell } from "../components/RunnerShell";
 import { useRunner } from "../providers/RunnerProvider";
@@ -36,7 +36,7 @@ export default function QueuePage() {
             : "You are inactive. Toggle active to receive matches."}
         </p>
         <p className="mt-3 mono text-[11.5px] font-bold uppercase tracking-[0.08em] text-label-muted">
-          Status keys · {ORDER_STATUSES.length}
+          Tracker steps · {FAN_TRACKER_STEPS.map((s) => ORDER_STATUS_LABELS[s]).join(" → ")}
         </p>
       </Card>
     </RunnerShell>
