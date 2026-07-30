@@ -12,7 +12,7 @@ export default function ActivePage() {
       <Card className="mt-8 border-2 border-navy">
         <SectionLabel>Current order</SectionLabel>
         <p className="mt-3 text-base font-medium text-ink">
-          No active order. Accept from the queue once HEX-148 lands.
+          No active order. Advance one from Queue when you are available.
         </p>
       </Card>
     </RunnerShell>
