@@ -1,12 +1,3 @@
 @import "tailwindcss";
-
-:root {
-  color-scheme: light;
-}
-
-body {
-  margin: 0;
-  font-family: ui-sans-serif, system-ui, sans-serif;
-  background: #0b1f3a;
-  color: #f7f4ef;
-}
+@source "../../../packages/ui/src";
+@import "@stadiyums/ui/styles";
