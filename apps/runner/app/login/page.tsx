@@ -27,7 +27,7 @@ export default function LoginPage() {
     <RunnerShell
       eyebrow="StadiYums Runner"
       title="Sign in"
-      description="Employee ID and PIN. Scaffold accepts PIN 1234 until M1 auth ships."
+      description="Use your assigned employee credentials to start a shift."
     >
       <Card className="mt-8 border-2 border-navy">
         <SectionLabel>Credentials</SectionLabel>
@@ -59,7 +59,7 @@ export default function LoginPage() {
         </div>
         {error ? (
           <p className="mt-3 text-base font-semibold text-orange">
-            Check Employee ID and PIN (demo PIN: 1234).
+            Check your Employee ID and PIN, then try again.
           </p>
         ) : null}
         <Button className="mt-6 w-full min-h-14 text-base" type="button" onClick={submit}>

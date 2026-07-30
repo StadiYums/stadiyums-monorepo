@@ -19,7 +19,7 @@ export default function CheckInPage() {
   return (
     <RunnerShell
       title="Zone check-in"
-      description="Pick your working zone before claiming orders. Real zone assignment lands in M1."
+      description="Choose the area you are authorized to cover today."
     >
       <Card className="mt-8 border-2 border-navy">
         <SectionLabel>Select zone</SectionLabel>
