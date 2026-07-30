@@ -7,6 +7,11 @@ export { ConvexOfflineBanner } from "./components/ConvexOfflineBanner";
 export { VendorToggle } from "./components/VendorToggle";
 export { BrandHeader } from "./components/BrandHeader";
 export { AppShell } from "./components/AppShell";
+export {
+  WorkspaceShell,
+  type WorkspaceContentWidth,
+  type WorkspaceVariant,
+} from "./components/WorkspaceShell";
 
 export { ConvexClientProvider } from "./providers/ConvexClientProvider";
 export { ThemeProvider, useTheme } from "./providers/ThemeProvider";

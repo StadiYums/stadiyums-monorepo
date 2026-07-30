@@ -2,6 +2,8 @@
 
 Shared design system for fan, runner, system-admin, and vendor apps (HEX-143 / HEX-174 / HEX-175).
 
+Use `AppShell` for the intentionally capped mobile-first fan and runner surfaces. Use `WorkspaceShell` for system-admin and vendor operational workspaces. `WorkspaceShell` keeps the sidebar and main area fluid; apply `contentWidth="readable"` for forms, `"large"` for maps/tables on ultrawide screens, and `"fluid"` for dashboards or queues. Its `variant` identifies dashboard, table, map, form, and kiosk compositions.
+
 ## Tokens
 
 Defined in `src/globals.css`:
@@ -21,6 +23,7 @@ Semantic aliases: `--color-surface`, `--color-foreground`, `--color-accent`, `--
 ## Primitives
 
 - `AppShell` — cream surround + white frame (`mobile` ≈520px, `wide` ops)
+- `WorkspaceShell` — full-viewport operational frame with fluid, readable, and large inner widths
 - `BrandHeader` — navy brand block
 - `Card` — variants: `default` \| `menu` \| `workflow` \| `metric` \| `alert`
 - `Button` — `primary` \| `secondary` \| `advance` \| `icon` \| `destructive` (min 44px)
