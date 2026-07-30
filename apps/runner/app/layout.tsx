@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Archivo_Black, Inter, Space_Mono } from "next/font/google";
 import { ConvexClientProvider, ThemeProvider } from "@stadiyums/ui";
+import { AuthGate } from "../components/AuthGate";
+import { RunnerNav } from "../components/RunnerNav";
+import { RunnerProvider } from "../providers/RunnerProvider";
 import "./globals.css";
 
 const archivoBlack = Archivo_Black({
@@ -33,10 +36,17 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full" suppressHydrationWarning>
       <body
-        className={`${archivoBlack.variable} ${inter.variable} ${spaceMono.variable} min-h-full font-body antialiased`}
+        className={`${archivoBlack.variable} ${inter.variable} ${spaceMono.variable} min-h-full bg-cream font-body text-ink antialiased`}
       >
         <ConvexClientProvider>
-          <ThemeProvider>{children}</ThemeProvider>
+          <ThemeProvider>
+            <RunnerProvider>
+              <AuthGate>
+                {children}
+                <RunnerNav />
+              </AuthGate>
+            </RunnerProvider>
+          </ThemeProvider>
         </ConvexClientProvider>
       </body>
     </html>
