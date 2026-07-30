@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Archivo_Black, Inter, Space_Mono } from "next/font/google";
 import {
+  AppShell,
   ConvexClientProvider,
   ThemeProvider,
   VendorToggle,
@@ -46,10 +47,12 @@ export default function RootLayout({
           <ThemeProvider>
             <AdminProvider>
               <AuthGate>
-                <div className="flex min-h-full flex-col md:flex-row">
-                  <AdminSidebar />
-                  {children}
-                </div>
+                <AppShell width="wide">
+                  <div className="flex min-h-full flex-col md:flex-row">
+                    <AdminSidebar />
+                    {children}
+                  </div>
+                </AppShell>
               </AuthGate>
               <VendorToggle />
             </AdminProvider>

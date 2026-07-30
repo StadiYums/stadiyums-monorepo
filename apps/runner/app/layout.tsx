@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Archivo_Black, Inter, Space_Mono } from "next/font/google";
-import { ConvexClientProvider, ThemeProvider } from "@stadiyums/ui";
+import { AppShell, ConvexClientProvider, ThemeProvider } from "@stadiyums/ui";
 import { AuthGate } from "../components/AuthGate";
 import { RunnerNav } from "../components/RunnerNav";
 import { RunnerProvider } from "../providers/RunnerProvider";
@@ -42,8 +42,10 @@ export default function RootLayout({
           <ThemeProvider>
             <RunnerProvider>
               <AuthGate>
-                {children}
-                <RunnerNav />
+                <AppShell width="mobile">
+                  {children}
+                  <RunnerNav />
+                </AppShell>
               </AuthGate>
             </RunnerProvider>
           </ThemeProvider>

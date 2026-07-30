@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Archivo_Black, Inter, Space_Mono } from "next/font/google";
 import {
+  AppShell,
   ConvexClientProvider,
   ThemeProvider,
   VendorToggle,
@@ -42,7 +43,9 @@ export default function RootLayout({
       >
         <ConvexClientProvider>
           <ThemeProvider>
-            <FanProvider>{children}</FanProvider>
+            <FanProvider>
+              <AppShell width="mobile">{children}</AppShell>
+            </FanProvider>
             <VendorToggle />
           </ThemeProvider>
         </ConvexClientProvider>
