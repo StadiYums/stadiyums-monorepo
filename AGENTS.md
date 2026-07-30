@@ -61,7 +61,7 @@ Use the Hexacomb Linear MCP (`plugin-linear-linear` / Hexacomb workspace) for St
 
 ### Architecture note
 
-Route-only fan/runner scaffolds inside legacy `src/` are canceled. New UI lives under `apps/fan`, `apps/runner`, and `apps/admin` after the monorepo split (see HEX-142 and children). Keep legacy `src/` only until migration tickets complete.
+Route-only fan/runner scaffolds inside legacy `src/` are canceled. Product UI lives under `apps/fan`, `apps/runner`, and `apps/admin`. Local jump links live in `apps/landing` (`:3003`).
 
 <!-- convex-ai-start -->
 

@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
 import { Archivo_Black, Inter, Space_Mono } from "next/font/google";
-import { ConvexClientProvider } from "@/providers/ConvexClientProvider";
-import { ThemeProvider } from "@/providers/ThemeProvider";
-import { DemoProvider } from "@/providers/DemoProvider";
 import "./globals.css";
 
 const archivoBlack = Archivo_Black({
@@ -23,11 +20,8 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "StadiYums — Live Demo",
-  description: "More game. Less lines. In-seat concession ordering for live events.",
-  icons: {
-    icon: "/favicon.png",
-  },
+  title: "StadiYums — Dev landing",
+  description: "Jump into the fan, runner, or admin app",
 };
 
 export default function RootLayout({
@@ -38,13 +32,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full" suppressHydrationWarning>
       <body
-        className={`${archivoBlack.variable} ${inter.variable} ${spaceMono.variable} min-h-full font-body antialiased`}
+        className={`${archivoBlack.variable} ${inter.variable} ${spaceMono.variable} min-h-full bg-cream font-body text-ink antialiased`}
       >
-        <ConvexClientProvider>
-          <ThemeProvider>
-            <DemoProvider>{children}</DemoProvider>
-          </ThemeProvider>
-        </ConvexClientProvider>
+        {children}
       </body>
     </html>
   );

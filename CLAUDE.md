@@ -35,7 +35,7 @@ Ship:
 
 ## Monorepo direction
 
-Milestone **A0: Monorepo & Three-App Architecture** — start from HEX-142 (workspace), then app scaffolds / shared packages / migrations. Do not reintroduce canceled `/fan` or `/runner` routes in legacy `src/`.
+Milestone **A0: Monorepo & Three-App Architecture** — start from HEX-142 (workspace), then app scaffolds / shared packages / migrations. Product UI lives in `apps/*`; do not reintroduce a unified DemoApp tab switcher.
 
 <!-- convex-ai-start -->
 
