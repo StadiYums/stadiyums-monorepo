@@ -8,6 +8,7 @@
     "build": "turbo run build",
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
+    "dev:landing": "pnpm --filter @stadiyums/landing dev",
     "dev:fan": "pnpm --filter @stadiyums/fan dev",
     "dev:runner": "pnpm --filter @stadiyums/runner dev",
     "dev:admin": "pnpm --filter @stadiyums/admin dev"

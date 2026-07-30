@@ -8,20 +8,21 @@ StadiYums is the **ordering platform**. The venue is the **experience**. Fans se
 
 ## 5-minute demo flow
 
+Run Convex (`npx convex dev`) and the apps (`pnpm dev`). Open the landing page at [http://localhost:3003](http://localhost:3003) or jump straight to each port.
+
 | Step | Action | What to say |
 |------|--------|-------------|
-| 1 | Open demo (StadiYums default) | "We built the in-seat ordering platform — fan app, runner queue, and live order tracking." |
-| 2 | Click **Grizzlies mode** (bottom-left) | "This is what it looks like under your brand. Fans see Fresno Grizzlies — not StadiYums." |
-| 3 | Point at navbar | "Powered by StadiYums in the header — we're infrastructure, you're the experience." |
-| 4 | **Fan app** tab | "A fan enters their aisle and seat, browses the menu, and places an order without leaving their seat." |
-| 5 | Place a sample order | Add a hot dog and drink → Place order → tracker appears |
-| 6 | **Runner app** tab | "Your concession staff see a clear queue: seat number, items, time in queue, and one-tap status updates." |
-| 7 | Advance the order | Tap through Preparing → On the way → Delivered |
-| 8 | **Fan app** tab | "The fan's tracker updates in real time — no refresh, no leaving the game." |
-| 9 | Click **Exit Grizzlies** (optional) | "Same platform, any venue — we white-label the full experience." |
-| 10 | Close | Pilot scope, KPIs, and next step |
+| 1 | Open **Fan** (`:3000`) | "We built the in-seat ordering platform — fan app, runner queue, and live order tracking." |
+| 2 | Confirm aisle/seat, open the menu | "A fan enters their aisle and seat, browses the menu, and places an order without leaving their seat." |
+| 3 | Place a sample order | Add a hot dog and drink → Place order → tracker appears |
+| 4 | Open **Runner** (`:3001`), sign in (any ID + PIN `1234`), go active | "Your concession staff see a clear queue: seat number, items, time in queue, and one-tap status updates." |
+| 5 | Advance the order | Tap through Preparing → On the way → Delivered |
+| 6 | Return to **Fan** tracker | "The fan's tracker updates in real time — no refresh, no leaving the game." |
+| 7 | Optional: open **Admin** (`:3002`) | "Ops gets a separate console for runners, zones, and vendors — same backend." |
+| 8 | Close | Pilot scope, KPIs, and next step |
 
-**Reset demo** (header) clears cart and orders if you need to run the flow again in the same meeting.
+White-label / Grizzlies mode lives on each app via the shared theme toggle where enabled — not a unified DemoApp tab anymore.
+
 
 ---
 
@@ -71,7 +72,6 @@ This is a pilot prototype with a clear production path: real-time sync, payments
 
 ## Before the meeting
 
-- [ ] Set Grizzlies mode once to confirm branding loads correctly
-- [ ] Run fan → runner → fan loop once with Reset demo
-- [ ] Confirm demo URL loads on venue WiFi or use phone hotspot
+- [ ] Open Fan → Runner → Fan loop once on local ports
+- [ ] Confirm apps load on venue WiFi or use phone hotspot
 - [ ] Know the venue's concession vendor (Aramark, Levy, Delaware North, etc.) and POS if possible

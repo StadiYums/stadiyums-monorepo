@@ -2,7 +2,7 @@
 
 In-seat concession ordering for live events. Fans order from their seat, runners fulfill via a live queue, and everyone spends less time in lines.
 
-This monorepo hosts three deployable Next.js apps plus a shared Convex backend.
+This monorepo hosts three deployable Next.js apps, a small local landing page, plus a shared Convex backend.
 
 ## Apps
 
@@ -11,10 +11,11 @@ This monorepo hosts three deployable Next.js apps plus a shared Convex backend.
 | Fan | `@stadiyums/fan` | 3000 | Fan ordering PWA |
 | Runner | `@stadiyums/runner` | 3001 | Runner fulfillment |
 | Admin | `@stadiyums/admin` | 3002 | Stadium ops console |
+| Landing | `@stadiyums/landing` | 3003 | Local jump page (dev only) |
 
 Shared packages live under `packages/` (`ui`, `types`, `config`). Convex stays at the repo root and is shared by all apps.
 
-Legacy demo UI remains under `src/` until migration tickets (HEX-147 / HEX-148) complete. Prefer the apps above for new work.
+There is no unified DemoApp / tab switcher — use the standalone apps (or the landing page links).
 
 ## Stack
 
@@ -44,10 +45,11 @@ ln -sfn ../../.env.local apps/fan/.env.local
 ln -sfn ../../.env.local apps/runner/.env.local
 ln -sfn ../../.env.local apps/admin/.env.local
 
-# Terminal 2 — all apps via Turbo
+# Terminal 2 — all apps via Turbo (includes landing on :3003)
 pnpm dev
 ```
 
+- Landing: [http://localhost:3003](http://localhost:3003)
 - Fan: [http://localhost:3000](http://localhost:3000)
 - Runner: [http://localhost:3001](http://localhost:3001)
 - Admin: [http://localhost:3002](http://localhost:3002)
@@ -56,8 +58,8 @@ pnpm dev
 
 | Command | Description |
 |---------|-------------|
-| `pnpm dev` | Start fan, runner, and admin concurrently |
-| `pnpm dev:fan` / `dev:runner` / `dev:admin` | Start one app |
+| `pnpm dev` | Start fan, runner, admin, and landing concurrently |
+| `pnpm dev:landing` / `dev:fan` / `dev:runner` / `dev:admin` | Start one app |
 | `pnpm build` | Build all apps |
 | `pnpm build --filter=@stadiyums/fan` | Build one app |
 | `pnpm lint` | Lint all packages |
