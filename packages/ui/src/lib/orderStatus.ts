@@ -1,10 +1,2 @@
-/** Shared order status keys used by StatusBadge. Full ORDER_STEPS live in HEX-141. */
-export type OrderStatus = "placed" | "preparing" | "on_the_way" | "delivered";
-
-export type MenuItemId =
-  | "popcorn"
-  | "crackerjack"
-  | "drink"
-  | "pretzel"
-  | "hotdog"
-  | "burger";
+/** Re-export shared order/menu types from @stadiyums/types (HEX-156). */
+export type { OrderStatus, MenuItemId } from "@stadiyums/types";
