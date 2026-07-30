@@ -13,7 +13,7 @@ export default function ShiftPage() {
   return (
     <RunnerShell
       title="Shift"
-      description="Live queue stats for this session. Tips and earnings land in M7."
+      description="Your shift context, performance, and sign-out controls."
     >
       <div className="mt-8">
         <RunnerStats />
@@ -26,7 +26,7 @@ export default function ShiftPage() {
         <p className="mt-2 text-base font-medium text-ink">
           Zone: {zone?.label ?? "—"}
         </p>
-        <p className="mt-2 text-base font-medium text-ink">Tips: $0.00</p>
+        <p className="mt-2 text-base font-medium text-ink">Tips: Tracking unavailable</p>
         <Button
           className="mt-6 w-full min-h-14 text-base"
           type="button"

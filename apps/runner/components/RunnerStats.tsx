@@ -8,11 +8,11 @@ export function RunnerStats() {
 
   if (!stats) {
     return (
-      <div className="mb-[22px] flex flex-wrap gap-3">
+      <div className="mb-6 grid grid-cols-3 divide-x divide-cream/20 rounded-xl bg-navy px-2 py-3">
         {[0, 1, 2].map((key) => (
           <div
             key={key}
-            className="min-w-[130px] flex-1 animate-pulse rounded-md bg-navy/60 px-4 py-3.5"
+            className="h-12 animate-pulse rounded-md bg-cream/10 px-3"
           />
         ))}
       </div>
@@ -31,14 +31,14 @@ export function RunnerStats() {
   ];
 
   return (
-    <div className="mb-[22px] flex flex-wrap gap-3">
+    <div className="mb-6 grid grid-cols-3 divide-x divide-cream/20 rounded-xl bg-navy px-2 py-3">
       {chips.map((chip) => (
         <div
           key={chip.label}
-          className="min-w-[130px] flex-1 rounded-md border-2 border-navy bg-navy px-4 py-3.5 text-cream"
+          className="min-w-0 px-3 text-cream"
         >
           <div className="mono text-[22px] font-bold text-orange">{chip.value}</div>
-          <div className="text-[11px] font-bold uppercase tracking-[0.04em] text-cream/65">
+          <div className="mt-1 text-[10px] font-bold uppercase leading-tight tracking-[0.03em] text-cream/70">
             {chip.label}
           </div>
         </div>
