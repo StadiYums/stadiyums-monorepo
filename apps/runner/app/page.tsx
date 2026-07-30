@@ -1,5 +1,6 @@
 "use client";
 
+import { ORDER_STATUSES } from "@stadiyums/types";
 import { Button, Card, SectionLabel } from "@stadiyums/ui";
 import { RunnerShell } from "../components/RunnerShell";
 import { useRunner } from "../providers/RunnerProvider";
@@ -33,6 +34,9 @@ export default function QueuePage() {
           {isAvailable
             ? "No claims yet — OrderQueue lands in HEX-148."
             : "You are inactive. Toggle active to receive matches."}
+        </p>
+        <p className="mt-3 mono text-[11.5px] font-bold uppercase tracking-[0.08em] text-label-muted">
+          Status keys · {ORDER_STATUSES.length}
         </p>
       </Card>
     </RunnerShell>
