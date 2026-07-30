@@ -8,7 +8,7 @@ type VendorToggleProps = {
 };
 
 /**
- * Theme switcher for fan + admin. Do not mount in the runner app.
+ * Theme switcher for fan, system-admin, and vendor. Do not mount in the runner app.
  */
 export function VendorToggle({ elevate = false }: VendorToggleProps) {
   const { themeId, toggleVendorMode } = useTheme();

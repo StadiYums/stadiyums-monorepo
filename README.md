@@ -2,7 +2,7 @@
 
 In-seat concession ordering for live events. Fans order from their seat, runners fulfill via a live queue, and everyone spends less time in lines.
 
-This monorepo hosts three deployable Next.js apps, a small local landing page, plus a shared Convex backend.
+This monorepo hosts four deployable Next.js product apps, a small local landing page, plus a shared Convex backend.
 
 ## Apps
 
@@ -10,7 +10,8 @@ This monorepo hosts three deployable Next.js apps, a small local landing page, p
 |-----|---------|------|------|
 | Fan | `@stadiyums/fan` | 3000 | Fan ordering PWA |
 | Runner | `@stadiyums/runner` | 3001 | Runner fulfillment |
-| Admin | `@stadiyums/admin` | 3002 | Stadium ops console |
+| System admin | `@stadiyums/system-admin` | 3002 | Stadium account administration and oversight |
+| Vendor | `@stadiyums/vendor` | 3004 | Vendor operations, menus, runners, and order desk |
 | Landing | `@stadiyums/landing` | 3003 | Local jump page (dev only) |
 
 Shared packages live under `packages/` (`ui`, `types`, `config`). Convex stays at the repo root and is shared by all apps.
@@ -43,7 +44,8 @@ npx convex dev
 # Point each Next app at the root env (Next only auto-loads .env* from the app dir)
 ln -sfn ../../.env.local apps/fan/.env.local
 ln -sfn ../../.env.local apps/runner/.env.local
-ln -sfn ../../.env.local apps/admin/.env.local
+ln -sfn ../../.env.local apps/system-admin/.env.local
+ln -sfn ../../.env.local apps/vendor/.env.local
 
 # Terminal 2 — all apps via Turbo (includes landing on :3003)
 pnpm dev
@@ -58,8 +60,8 @@ pnpm dev
 
 | Command | Description |
 |---------|-------------|
-| `pnpm dev` | Start fan, runner, admin, and landing concurrently |
-| `pnpm dev:landing` / `dev:fan` / `dev:runner` / `dev:admin` | Start one app |
+| `pnpm dev` | Start fan, runner, system-admin, vendor, and landing concurrently |
+| `pnpm dev:landing` / `dev:fan` / `dev:runner` / `dev:system-admin` / `dev:vendor` | Start one app |
 | `pnpm build` | Build all apps |
 | `pnpm build --filter=@stadiyums/fan` | Build one app |
 | `pnpm lint` | Lint all packages |

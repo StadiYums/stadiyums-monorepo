@@ -1,6 +1,6 @@
 # `@stadiyums/ui`
 
-Shared design system for fan, runner, and admin apps (HEX-143 / HEX-174).
+Shared design system for fan, runner, system-admin, and vendor apps (HEX-143 / HEX-174 / HEX-175).
 
 ## Tokens
 
