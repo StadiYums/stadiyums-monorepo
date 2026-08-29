@@ -1,11 +1,6 @@
 import type { Metadata } from "next";
 import { Archivo_Black, Inter, Space_Mono } from "next/font/google";
-import {
-  ConvexClientProvider,
-  ThemeProvider,
-  VendorToggle,
-  WorkspaceShell,
-} from "@stadiyums/ui";
+import { ThemeProvider, VendorToggle, WorkspaceShell } from "@stadiyums/ui";
 import { AdminSidebar } from "../components/AdminSidebar";
 import { AuthGate } from "../components/AuthGate";
 import { AdminProvider } from "../providers/AdminProvider";
@@ -43,18 +38,16 @@ export default function RootLayout({
       <body
         className={`${archivoBlack.variable} ${inter.variable} ${spaceMono.variable} min-h-full bg-cream font-body text-ink antialiased`}
       >
-        <ConvexClientProvider>
-          <ThemeProvider>
-            <AdminProvider>
-              <AuthGate>
-                <WorkspaceShell sidebar={<AdminSidebar />} sidebarLabel="Vendor navigation">
-                  {children}
-                </WorkspaceShell>
-              </AuthGate>
-              <VendorToggle />
-            </AdminProvider>
-          </ThemeProvider>
-        </ConvexClientProvider>
+        <ThemeProvider>
+          <AdminProvider>
+            <AuthGate>
+              <WorkspaceShell sidebar={<AdminSidebar />} sidebarLabel="Vendor navigation">
+                {children}
+              </WorkspaceShell>
+            </AuthGate>
+            <VendorToggle />
+          </AdminProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
