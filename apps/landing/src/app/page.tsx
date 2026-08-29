@@ -40,7 +40,7 @@ export default function LandingPage() {
       </h1>
       <p className="mt-4 max-w-xl text-base font-medium leading-snug text-ink">
         The unified DemoApp tab switcher is gone. Run each product surface as its
-        own app — fan, runner, system admin, and vendor share one Convex backend.
+        own app — fan, runner, system admin, and vendor share one backend.
       </p>
 
       <ul className="mt-10 space-y-4">
@@ -66,8 +66,7 @@ export default function LandingPage() {
       </ul>
 
       <p className="mono mt-10 text-[11px] font-bold uppercase tracking-[0.08em] text-label-muted">
-        Start all apps · <span className="text-navy">pnpm dev</span> · Convex ·{" "}
-        <span className="text-navy">npx convex dev</span>
+        Start all apps · <span className="text-navy">pnpm dev</span>
       </p>
     </main>
   );
