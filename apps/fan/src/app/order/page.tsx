@@ -4,9 +4,9 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Card, SectionLabel } from "@stadiyums/ui";
-import { CartBar } from "../../components/CartBar";
+import { CartBar } from "../../features/orders/components/CartBar";
 import { FanShell } from "../../components/FanShell";
-import { MenuGrid } from "../../components/MenuGrid";
+import { MenuGrid } from "../../features/orders/components/MenuGrid";
 import { useFan } from "../../providers/FanProvider";
 
 export default function OrderPage() {

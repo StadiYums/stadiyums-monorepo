@@ -57,7 +57,7 @@ export function getMenuItem(id: string): MenuItem | undefined {
  * Tracker steps mirror the Convex demo backend's status flow (placed →
  * preparing → on_the_way → delivered). This intentionally differs from the
  * granular `FAN_TRACKER_STEPS` in @stadiyums/types, which isn't wired to
- * `convex/orders.ts` yet (HEX-62).
+ * `orderService.advanceOrder` demo flow (legacy statuses).
  */
 const TRACKER_STATUSES = [
   "placed",

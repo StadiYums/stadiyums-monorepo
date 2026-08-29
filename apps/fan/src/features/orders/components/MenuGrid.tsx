@@ -1,8 +1,8 @@
 "use client";
 
 import { MenuIcon, SectionLabel, money } from "@stadiyums/ui";
-import { MENU } from "../lib/menu";
-import { useFan } from "../providers/FanProvider";
+import { MENU } from "../../../lib/menu";
+import { useFan } from "../../../providers/FanProvider";
 
 export function MenuGrid() {
   const { cart, setCart } = useFan();

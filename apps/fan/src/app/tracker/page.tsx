@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { FanShell } from "../../components/FanShell";
-import { OrderTracker } from "../../components/OrderTracker";
+import { OrderTracker } from "../../features/orders/components/OrderTracker";
 import { useFan } from "../../providers/FanProvider";
 
 export default function TrackerPage() {

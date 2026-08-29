@@ -1,11 +1,6 @@
 import type { Metadata } from "next";
 import { Archivo_Black, Inter, Space_Mono } from "next/font/google";
-import {
-  AppShell,
-  ConvexClientProvider,
-  ThemeProvider,
-  VendorToggle,
-} from "@stadiyums/ui";
+import { AppShell, ThemeProvider, VendorToggle } from "@stadiyums/ui";
 import { FanProvider } from "../providers/FanProvider";
 import "./globals.css";
 
@@ -41,14 +36,12 @@ export default function RootLayout({
       <body
         className={`${archivoBlack.variable} ${inter.variable} ${spaceMono.variable} min-h-full bg-cream font-body text-ink antialiased`}
       >
-        <ConvexClientProvider>
-          <ThemeProvider>
-            <FanProvider>
-              <AppShell width="mobile">{children}</AppShell>
-            </FanProvider>
-            <VendorToggle />
-          </ThemeProvider>
-        </ConvexClientProvider>
+        <ThemeProvider>
+          <FanProvider>
+            <AppShell width="mobile">{children}</AppShell>
+          </FanProvider>
+          <VendorToggle />
+        </ThemeProvider>
       </body>
     </html>
   );

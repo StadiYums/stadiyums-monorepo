@@ -1,15 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { useMutation } from "convex/react";
-import { api } from "../../../convex/_generated/api";
 import { Button, money } from "@stadiyums/ui";
-import { getMenuItem } from "../lib/menu";
-import { useFan } from "../providers/FanProvider";
+import { useRouter } from "next/navigation";
+import { placeOrderAction } from "../actions/place-order";
+import { getMenuItem } from "../../../lib/menu";
+import { useFan } from "../../../providers/FanProvider";
 
 export function CartBar() {
-  const { cart, ticket, setActiveOrderId, setSeatValidationError, setCart } = useFan();
-  const placeOrder = useMutation(api.orders.placeOrder);
+  const router = useRouter();
+  const { cart, ticket, setActiveOrderId, setSeatValidationError, setCart } =
+    useFan();
   const [isPlacing, setIsPlacing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -35,19 +36,25 @@ export function CartBar() {
     setError(null);
     setIsPlacing(true);
     try {
-      const orderId = await placeOrder({
+      const result = await placeOrderAction({
         aisle: ticket.aisle,
         seat: ticket.seat,
         items,
       });
 
+      if (!result.success) {
+        setError(result.error);
+        return;
+      }
+
       setCart({});
-      setActiveOrderId(orderId);
+      setActiveOrderId(result.data.id);
+      router.push("/tracker");
     } catch (err) {
       setError(
         err instanceof Error
           ? err.message
-          : "Could not place order. Is the Convex backend running?",
+          : "Could not place order. Check your database connection.",
       );
     } finally {
       setIsPlacing(false);
@@ -62,13 +69,17 @@ export function CartBar() {
     >
       <div className="mx-auto max-w-[520px] px-5">
         {error && (
-          <p role="alert" className="mb-2 text-center text-sm font-medium text-white/95">
+          <p
+            role="alert"
+            className="mb-2 text-center text-sm font-medium text-white/95"
+          >
             {error}
           </p>
         )}
         <div className="flex items-center justify-between">
           <div className="text-sm">
-            <b className="mono">{count}</b> items · <b className="mono">{money(total)}</b>
+            <b className="mono">{count}</b> items ·{" "}
+            <b className="mono">{money(total)}</b>
           </div>
           <Button
             type="button"

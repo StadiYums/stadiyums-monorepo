@@ -1,17 +1,13 @@
 "use client";
 
-import { useQuery } from "convex/react";
-import { api } from "../../../convex/_generated/api";
 import { Button, Card, SectionLabel, money } from "@stadiyums/ui";
-import { getMenuItem, ORDER_STEPS } from "../lib/menu";
-import { useFan } from "../providers/FanProvider";
+import { getMenuItem, ORDER_STEPS } from "../../../lib/menu";
+import { useFan } from "../../../providers/FanProvider";
+import { useOrder } from "../hooks/use-order";
 
 export function OrderTracker() {
   const { activeOrderId, setActiveOrderId } = useFan();
-  const order = useQuery(
-    api.orders.getOrder,
-    activeOrderId ? { orderId: activeOrderId } : "skip",
-  );
+  const { order } = useOrder(activeOrderId);
 
   if (!activeOrderId || order === undefined) {
     return null;
@@ -56,7 +52,9 @@ export function OrderTracker() {
             Aisle {order.aisle} · Seat {order.seat}
           </h2>
         </div>
-        <span className="mono text-xs text-label-muted">#SY-{order.orderNumber}</span>
+        <span className="mono text-xs text-label-muted">
+          #SY-{order.orderNumber}
+        </span>
       </div>
 
       <div className="mb-8 flex">
