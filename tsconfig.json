@@ -14,6 +14,6 @@
     "jsx": "react-jsx",
     "incremental": true
   },
-  "include": ["convex/**/*.ts"],
-  "exclude": ["node_modules", "apps", "packages", ".next"]
+  "include": ["packages/db/src/**/*.ts"],
+  "exclude": ["node_modules", "apps", ".next"]
 }
