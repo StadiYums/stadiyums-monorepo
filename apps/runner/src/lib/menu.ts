@@ -58,7 +58,7 @@ export function statusLabel(status: OrderStatus): string {
 }
 
 /**
- * Advance CTA labels for the Convex demo STATUS_FLOW
+ * Advance CTA labels for the demo STATUS_FLOW
  * (placed → preparing → on_the_way → delivered). Granular labels land with HEX-62.
  */
 export function nextStatusLabel(status: OrderStatus): string {

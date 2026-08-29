@@ -1,10 +1,9 @@
 "use client";
 
-import { useQuery } from "convex/react";
-import { api } from "../../../convex/_generated/api";
+import { useStats } from "../features/queue/hooks/use-queue";
 
 export function RunnerStats() {
-  const stats = useQuery(api.orders.getStats);
+  const { stats } = useStats();
 
   if (!stats) {
     return (

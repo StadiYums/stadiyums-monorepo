@@ -1,10 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useMutation, useQuery } from "convex/react";
 import { Button, StatusBadge, elapsed } from "@stadiyums/ui";
-import { api } from "../../../convex/_generated/api";
-import type { Id } from "../../../convex/_generated/dataModel";
+import type { OrderItem } from "@stadiyums/db";
+import { useQueue } from "../features/queue/hooks/use-queue";
 import { getMenuItem, nextStatusLabel, statusLabel } from "../lib/menu";
 
 function borderAccent(status: string): string {
@@ -22,18 +21,17 @@ function borderAccent(status: string): string {
 }
 
 export function OrderQueue() {
-  const queue = useQuery(api.orders.listQueue);
-  const advanceOrder = useMutation(api.orders.advanceOrder);
+  const { queue, error: queueError, advance } = useQueue();
   const [now, setNow] = useState(() => Date.now());
   const [advanceError, setAdvanceError] = useState<string | null>(null);
-  const [advancingId, setAdvancingId] = useState<Id<"orders"> | null>(null);
+  const [advancingId, setAdvancingId] = useState<string | null>(null);
 
   useEffect(() => {
     const interval = window.setInterval(() => setNow(Date.now()), 1000);
     return () => window.clearInterval(interval);
   }, []);
 
-  if (!queue) {
+  if (queue === undefined) {
     return (
       <p className="py-5 text-center text-[15px] font-medium text-label-muted">
         Loading queue…
@@ -49,32 +47,28 @@ export function OrderQueue() {
     );
   }
 
-  const handleAdvance = async (orderId: Id<"orders">) => {
+  const handleAdvance = async (orderId: string) => {
     setAdvanceError(null);
     setAdvancingId(orderId);
-    try {
-      await advanceOrder({ orderId });
-    } catch (err) {
-      setAdvanceError(
-        err instanceof Error
-          ? err.message
-          : "Could not update order. Is the Convex backend running?",
-      );
-    } finally {
-      setAdvancingId(null);
+    const result = await advance(orderId);
+    if (!result.success) {
+      setAdvanceError(result.error);
     }
+    setAdvancingId(null);
   };
+
+  const displayError = advanceError ?? queueError;
 
   return (
     <div className="space-y-3">
-      {advanceError ? (
+      {displayError ? (
         <p role="alert" className="text-center text-sm font-medium text-red-600">
-          {advanceError}
+          {displayError}
         </p>
       ) : null}
       {queue.map((order) => {
         const itemsSummary = order.items
-          .map((item) => {
+          .map((item: OrderItem) => {
             const menuItem = getMenuItem(item.menuItemId);
             return `${item.qty}x ${menuItem?.name ?? item.menuItemId}`;
           })
@@ -82,7 +76,7 @@ export function OrderQueue() {
 
         return (
           <div
-            key={order._id}
+            key={order.id}
             className={`flex flex-wrap items-center justify-between gap-3.5 rounded-md border-2 border-navy border-l-4 bg-surface-white px-[18px] py-4 ${borderAccent(order.status)}`}
           >
             <div className="mono min-w-[130px] text-[15px] font-bold text-navy">
@@ -98,10 +92,10 @@ export function OrderQueue() {
             <Button
               variant="advance"
               className="w-full min-h-12 min-[561px]:w-auto"
-              disabled={advancingId === order._id}
-              onClick={() => void handleAdvance(order._id)}
+              disabled={advancingId === order.id}
+              onClick={() => void handleAdvance(order.id)}
             >
-              {advancingId === order._id ? "Updating…" : nextStatusLabel(order.status)}
+              {advancingId === order.id ? "Updating…" : nextStatusLabel(order.status)}
             </Button>
           </div>
         );

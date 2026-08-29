@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Archivo_Black, Inter, Space_Mono } from "next/font/google";
-import { AppShell, ConvexClientProvider, ThemeProvider } from "@stadiyums/ui";
+import { AppShell, ThemeProvider } from "@stadiyums/ui";
 import { AuthGate } from "../components/AuthGate";
 import { RunnerNav } from "../components/RunnerNav";
 import { RunnerProvider } from "../providers/RunnerProvider";
@@ -38,18 +38,16 @@ export default function RootLayout({
       <body
         className={`${archivoBlack.variable} ${inter.variable} ${spaceMono.variable} min-h-full bg-cream font-body text-ink antialiased`}
       >
-        <ConvexClientProvider>
-          <ThemeProvider>
-            <RunnerProvider>
-              <AuthGate>
-                <AppShell width="mobile">
-                  {children}
-                  <RunnerNav />
-                </AppShell>
-              </AuthGate>
-            </RunnerProvider>
-          </ThemeProvider>
-        </ConvexClientProvider>
+        <ThemeProvider>
+          <RunnerProvider>
+            <AuthGate>
+              <AppShell width="mobile">
+                {children}
+                <RunnerNav />
+              </AppShell>
+            </AuthGate>
+          </RunnerProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
