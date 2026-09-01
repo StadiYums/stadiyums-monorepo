@@ -3,17 +3,19 @@ import type { ReactNode } from "react";
 type BrandHeaderProps = {
   title?: string;
   context?: string;
+  tagline?: string;
   trailing?: ReactNode;
 };
 
-/** Deep navy brand block — orange reserved for active nav elsewhere. */
+/** Deep navy brand block — venue context and optional tagline chip. */
 export function BrandHeader({
   title = "StadiYums",
   context,
+  tagline,
   trailing,
 }: BrandHeaderProps) {
   return (
-    <header className="bg-navy px-4 py-4 text-cream safe-area-pad">
+    <header className="bg-navy px-4 py-4 text-cream">
       <div className="mx-auto flex w-full max-w-[520px] items-start justify-between gap-3 md:max-w-6xl">
         <div>
           <p className="font-display text-lg leading-none tracking-tight">{title}</p>
@@ -23,7 +25,13 @@ export function BrandHeader({
             </p>
           ) : null}
         </div>
-        {trailing}
+        {tagline ? (
+          <span className="mono shrink-0 rounded-pill border border-accent-border px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.06em] text-orange">
+            {tagline}
+          </span>
+        ) : (
+          trailing
+        )}
       </div>
     </header>
   );

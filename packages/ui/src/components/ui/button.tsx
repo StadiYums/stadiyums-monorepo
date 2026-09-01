@@ -8,6 +8,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
+        checkout:
+          "rounded-[8px] bg-surface-white px-[22px] py-3 text-[14.5px] text-orange-dim hover:bg-cream active:bg-cream disabled:bg-[var(--disabled-bg)] disabled:text-placeholder",
         primary:
           "rounded-[10px] bg-navy px-5 text-cream hover:bg-navy-2 active:bg-navy-soft disabled:bg-[var(--disabled-bg)] disabled:text-placeholder",
         secondary:

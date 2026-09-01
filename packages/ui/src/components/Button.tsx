@@ -2,7 +2,7 @@ import { type ButtonHTMLAttributes } from "react";
 import { Button as UiButton } from "./ui/button";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: "primary" | "secondary" | "advance" | "icon" | "destructive";
+  variant?: "primary" | "secondary" | "advance" | "checkout" | "icon" | "destructive";
 };
 
 /** Stadium-themed button — re-exports shadcn/ui primitive with legacy variant names. */

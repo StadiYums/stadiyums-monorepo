@@ -26,10 +26,19 @@ export function Card({
   );
 }
 
-/** Uppercase section divider — muted warm gray, heavy tracking. */
-export function SectionLabel({ children }: { children: ReactNode }) {
+/** Uppercase section divider — muted or orange action label. */
+export function SectionLabel({
+  children,
+  variant = "default",
+}: {
+  children: ReactNode;
+  variant?: "default" | "action";
+}) {
+  const color = variant === "action" ? "text-orange" : "text-label-muted";
   return (
-    <p className="mono mb-2.5 text-[13px] font-bold uppercase tracking-[0.08em] text-label-muted">
+    <p
+      className={`mono mb-2.5 text-[11.5px] font-bold uppercase tracking-[0.08em] ${color}`}
+    >
       {children}
     </p>
   );
