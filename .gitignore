@@ -24,6 +24,7 @@ dist/
 
 # misc
 .DS_Store
+.verification/
 *.pem
 
 # debug
