@@ -19,20 +19,8 @@ export function MenuGrid() {
   };
 
   return (
-    <section aria-labelledby="menu-heading">
-      <div className="flex flex-col gap-[var(--space-2)]">
-        <h1
-          id="menu-heading"
-          className="font-display text-[1.75rem] font-bold leading-[1.05] tracking-[-0.035em] text-navy"
-        >
-          Pick your game-day favorites
-        </h1>
-        <p className="max-w-[38ch] text-sm leading-relaxed text-label-muted">
-          Add what you want—we&apos;ll bring it straight to your seat.
-        </p>
-      </div>
-
-      <div className="mt-[var(--space-5)] grid grid-cols-1 gap-[var(--space-3)] min-[400px]:grid-cols-2">
+    <section aria-label="Menu">
+      <div className="grid grid-cols-1 gap-[var(--space-3)] min-[480px]:grid-cols-2 lg:grid-cols-3">
         {MENU.map((item) => {
           const qty = cart[item.id] ?? 0;
           return (
@@ -40,8 +28,8 @@ export function MenuGrid() {
               key={item.id}
               className="flex flex-col gap-[var(--space-3)] rounded-lg border border-line bg-surface-white p-[var(--space-4)]"
             >
-              <div className="flex aspect-[1.5/1] w-full items-center justify-center rounded-[9px] bg-cream">
-                <div className="h-[64%] w-[64%]">
+              <div className="flex h-36 w-full items-center justify-center rounded-[9px] bg-cream min-[480px]:h-32 lg:h-36">
+                <div className="h-[56%] w-[56%] min-[480px]:h-[64%] min-[480px]:w-[64%]">
                   <MenuIcon icon={item.icon} />
                 </div>
               </div>

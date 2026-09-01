@@ -27,8 +27,21 @@ export function OperateCartBar({
       className={`fixed inset-x-0 bottom-0 z-40 bg-orange py-4 text-white transition-transform duration-[250ms] ease-out ${
         visible ? "translate-y-0" : "translate-y-[110%]"
       }`}
+      style={{
+        position: "fixed",
+        insetInline: 0,
+        bottom: 0,
+        transform: visible ? "translateY(0)" : "translateY(110%)",
+        transition: "transform 250ms ease-out",
+      }}
     >
-      <div className="mx-auto max-w-[520px] px-5">
+      <div
+        className="mx-auto max-w-[520px]"
+        style={{
+          boxSizing: "border-box",
+          paddingInline: "var(--space-page-inline)",
+        }}
+      >
         {error ? (
           <p
             role="alert"

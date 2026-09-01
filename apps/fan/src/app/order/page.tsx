@@ -35,21 +35,32 @@ export default function OrderPage() {
   }
 
   return (
-    <FanOperateLayout>
+    <FanOperateLayout width="wide">
       <div className="flex flex-col gap-[var(--space-section)]">
-        <SeatPreviewBlock
-          section={ticket.section}
-          aisle={ticket.aisle}
-          seat={ticket.seat}
-          action={
-            <Link
-              href="/seat"
-              className="text-[13px] font-semibold text-cream/75 underline-offset-2 hover:text-cream hover:underline"
-            >
-              Change seat
-            </Link>
-          }
-        />
+        <div className="flex max-w-[40rem] flex-col gap-[var(--space-6)]">
+          <div className="flex flex-col gap-[var(--space-2)]">
+            <h1 className="font-display text-[1.75rem] font-bold leading-[1.05] tracking-[-0.035em] text-navy">
+              Order from your seat
+            </h1>
+            <p className="max-w-[38ch] text-sm leading-relaxed text-label-muted">
+              Add your game-day favorites and we&apos;ll bring them to you.
+            </p>
+          </div>
+
+          <SeatPreviewBlock
+            section={ticket.section}
+            aisle={ticket.aisle}
+            seat={ticket.seat}
+            action={
+              <Link
+                href="/seat"
+                className="text-[13px] font-semibold text-cream/75 underline-offset-2 hover:text-cream hover:underline"
+              >
+                Change seat
+              </Link>
+            }
+          />
+        </div>
 
         <MenuGrid />
       </div>
