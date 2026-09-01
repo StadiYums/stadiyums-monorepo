@@ -78,3 +78,26 @@ Apply the change across every affected layer:
    principle changes how future work should be done.
 5. State any intentional compromise in the handoff. A quick patch is acceptable
    only when it is explicitly scoped as temporary and its follow-up is recorded.
+
+### Validation: reproduce and observe the real output
+
+**A reproducible, observed result is the 100% confidence point of validation.**
+Never declare a UI, route, interaction, or integration complete because source
+code looks correct, a build passes, a design system provides a token, or an
+automated detector/reviewer reports success. Those are supporting signals, not
+proof.
+
+Before handoff:
+
+1. Run the relevant product flow against the actual local or deployed route.
+2. View the rendered output at the requested viewport(s) and inspect the exact
+   changed region; for visual work, screenshots alone are insufficient if they
+   conceal the detail that changed.
+3. Exercise the changed control or state transition where one exists.
+4. Compare the observed result to the user request and the surrounding surface.
+5. If reproduction or observation is unavailable, say so plainly and do **not**
+   claim completion. Resolve access or ask the user for a way to reproduce it.
+
+Treat design systems, static analysis, typechecks, builds, and subagent reviews
+as hypotheses to test against the real product—not as permission to trust our
+own judgment.
