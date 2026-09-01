@@ -1,8 +1,14 @@
 # Product
 
-## Register
+<!-- impeccable:product-schema 1 -->
 
-product
+## Platform
+
+web (multi-app monorepo)
+
+## Stack
+
+Next.js 16 App Router, TypeScript, Tailwind CSS v4, Server Actions, PostgreSQL + Drizzle (`packages/db`). Apps: fan `:3000`, runner `:3001`, system-admin `:3002`, landing `:3003`, vendor `:3004`. Shared UI: `@stadiyums/ui`. Marketing site (Persuade) lives in [StadiYums/stadiyums-marketing](https://github.com/StadiYums/stadiyums-marketing).
 
 ## Users
 
@@ -20,19 +26,41 @@ The current live demo exists to **close venue pilots**: prove the workflow is re
 
 Success looks like a venue operator understanding the fan and runner flows within minutes and wanting to talk about a pilot.
 
-## Brand Personality
+## Positioning
 
-**Game-day energy.** Confident, loud when it counts, never corporate. The product should feel like part of the stadium experience: navy and orange conviction, monospace ticket details, bold headlines that read at arm's length in daylight.
+In-seat delivery fulfilled by the venue’s own vendors — not a generic third-party delivery marketplace. Public line: **More game. Less lines.**
 
-Emotional goal: fans feel they are still *in* the game while ordering; staff feel the tool keeps pace with a rush; buyers feel this was built for venues, not adapted from generic delivery software.
+## Operating Context
 
-## Anti-references
+- Product demo: https://demo.stadiyums.shop/ (fan + runner in one page; Chukchansi Park is a **demo venue**).
+- Monorepo runs the same flows as separate apps for pilot development.
+- Marketing site links to the demo; palette and mechanism must match what an AE shows.
 
-**Generic SaaS landing patterns.** No purple gradients, hero metric blocks, identical icon-card feature grids, or "modern startup" chrome that could belong to any B2B tool. StadiYums should not look like it was generated from a SaaS template.
+## Brand Commitments
 
-Also avoid feeling like a fast-food delivery app clone (DoorDash/Uber Eats UI patterns). This is in-venue, seat-specific ordering, not curbside delivery.
+- Name spelling: **StadiYums** (capital Y).
+- Voice line: **More game. Less lines.**
+- Palette locked to demo.stadiyums.shop / `packages/ui/src/globals.css`:
 
-## Design Principles
+  - navy `#0B1D33` — identity, chrome, primary text
+  - navy-deep `#071527` / navy-2 `#132A47` — recessed chrome
+  - orange `#FD490A` / orange-dim `#E44309` — primary action
+  - green `#307C27` — success / delivered
+  - cream `#F7F5F0` — page ground
+  - line `#E4E0D8` — rules and borders
+  - ink `#1A1A1A` / label-muted for secondary copy
+
+  Operate apps use Archivo Black + Inter + Space Mono. Marketing Persuade uses Archivo Narrow — do not mix on product surfaces.
+
+## Evidence on Hand
+
+- Live demo at https://demo.stadiyums.shop/
+- Impeccable surface briefs: `.impeccable/surfaces/fan-operate.md`, `runner-operate.md`
+- Swarm gap analysis: `docs/design/swarm/`
+
+Must not fabricate: partner stadiums, customer counts, revenue lifts, testimonials.
+
+## Product Principles
 
 1. **The game stays center stage.** Ordering is a means, not the experience. Flows are short, defaults are smart, and copy stays out of the way.
 2. **Built for the bowl.** Design for bright sun, glare, noise, and one-handed use: high contrast, large tap targets, readable type at a glance.

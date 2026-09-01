@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-07-08T05:15:00.000Z",
+  "generatedAt": "2026-09-01T05:00:00.000Z",
   "title": "Design System: StadiYums",
   "extensions": {
     "colorMeta": {
@@ -94,6 +94,11 @@
           "oklch(99% 0.004 85)"
         ]
       },
+      "line": {
+        "role": "neutral",
+        "displayName": "Rule",
+        "canonical": "oklch(90% 0.012 85)"
+      },
       "ink": {
         "role": "neutral",
         "displayName": "Ink",
@@ -163,7 +168,7 @@
       "refersTo": "button-primary",
       "description": "Primary action in the fixed orange cart bar.",
       "html": "<button class=\"ds-btn-primary\">Checkout</button>",
-      "css": ".ds-btn-primary { background: #fff; color: #E44309; padding: 12px 22px; border: none; border-radius: 8px; font-family: Inter, sans-serif; font-weight: 700; font-size: 14.5px; cursor: pointer; transition: background 0.15s ease; } .ds-btn-primary:hover { background: #F5F3EF; } .ds-btn-primary:focus-visible { outline: 2px solid #0B1D33; outline-offset: 2px; }"
+      "css": ".ds-btn-primary { background: #fff; color: #E44309; padding: 12px 22px; border: none; border-radius: 8px; font-family: Inter, sans-serif; font-weight: 700; font-size: 14.5px; cursor: pointer; transition: background 0.15s ease; } .ds-btn-primary:hover { background: #F7F5F0; } .ds-btn-primary:focus-visible { outline: 2px solid #0B1D33; outline-offset: 2px; }"
     },
     {
       "name": "Advance Button",
@@ -171,7 +176,7 @@
       "refersTo": "button-secondary",
       "description": "Runner action to move an order to the next status.",
       "html": "<button class=\"ds-btn-secondary\">Mark on the way</button>",
-      "css": ".ds-btn-secondary { background: #0B1D33; color: #F5F3EF; padding: 10px 16px; border: none; border-radius: 8px; font-family: Inter, sans-serif; font-weight: 700; font-size: 13px; cursor: pointer; white-space: nowrap; transition: background 0.15s ease; } .ds-btn-secondary:hover { background: #071527; } .ds-btn-secondary:focus-visible { outline: 2px solid #FD490A; outline-offset: 2px; } .ds-btn-secondary:disabled { background: #D8D2C4; color: #A89F8C; cursor: default; }"
+      "css": ".ds-btn-secondary { background: #0B1D33; color: #F7F5F0; padding: 10px 16px; border: none; border-radius: 8px; font-family: Inter, sans-serif; font-weight: 700; font-size: 13px; cursor: pointer; white-space: nowrap; transition: background 0.15s ease; } .ds-btn-secondary:hover { background: #071527; } .ds-btn-secondary:focus-visible { outline: 2px solid #FD490A; outline-offset: 2px; } .ds-btn-secondary:disabled { background: #D8D2C4; color: #A89F8C; cursor: default; }"
     },
     {
       "name": "Tab Active",
@@ -187,7 +192,7 @@
       "refersTo": "input-field",
       "description": "Aisle and seat number entry for fan ordering.",
       "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Aisle</span><input class=\"ds-input\" type=\"text\" placeholder=\"12\" value=\"12\" /></label>",
-      "css": ".ds-field { display: block; } .ds-field-label { display: block; font-family: 'Space Mono', monospace; font-size: 11.5px; color: #6B6459; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em; } .ds-input { width: 100%; padding: 13px 12px; border-radius: 8px; border: 1.5px solid rgba(11,29,51,0.1); background: #F5F3EF; font-family: 'Space Mono', monospace; font-size: 16px; font-weight: 700; color: #0B1D33; } .ds-input::placeholder { color: #A89F8C; font-weight: 400; } .ds-input:focus-visible { outline: 2px solid #FD490A; outline-offset: 1px; border-color: #FD490A; }"
+      "css": ".ds-field { display: block; } .ds-field-label { display: block; font-family: 'Space Mono', monospace; font-size: 11.5px; color: #6B7280; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em; } .ds-input { width: 100%; padding: 13px 12px; border-radius: 8px; border: 1.5px solid #E4E0D8; background: #F7F5F0; font-family: 'Space Mono', monospace; font-size: 16px; font-weight: 700; color: #0B1D33; } .ds-input::placeholder { color: #9CA3AF; font-weight: 400; } .ds-input:focus-visible { outline: 2px solid #FD490A; outline-offset: 1px; border-color: #FD490A; }"
     },
     {
       "name": "Menu Card",
@@ -195,7 +200,7 @@
       "refersTo": "card",
       "description": "Concession item with price and quantity controls.",
       "html": "<article class=\"ds-menu-card\"><div class=\"ds-menu-icon\"></div><div class=\"ds-menu-info\"><h3>Popcorn</h3><p class=\"ds-menu-price\">$8.00</p></div><div class=\"ds-qty\"><button type=\"button\">−</button><span>1</span><button type=\"button\">+</button></div></article>",
-      "css": ".ds-menu-card { background: #fff; border: 1px solid rgba(11,29,51,0.1); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px; } .ds-menu-icon { width: 100%; aspect-ratio: 1.5/1; background: #F5F3EF; border-radius: 9px; } .ds-menu-info h3 { font-family: Inter, sans-serif; font-size: 15px; font-weight: 600; margin: 0 0 2px; color: #1A1A1A; } .ds-menu-price { font-family: 'Space Mono', monospace; font-size: 13.5px; color: #0B1D33; font-weight: 700; margin: 0; } .ds-qty { display: flex; align-items: center; justify-content: space-between; gap: 10px; } .ds-qty button { width: 30px; height: 30px; border-radius: 50%; background: #F5F3EF; border: 1.5px solid rgba(11,29,51,0.1); color: #0B1D33; font-size: 16px; font-weight: 700; cursor: pointer; } .ds-qty span { font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; min-width: 16px; text-align: center; }"
+      "css": ".ds-menu-card { background: #fff; border: 1px solid #E4E0D8; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px; } .ds-menu-icon { width: 100%; aspect-ratio: 1.5/1; background: #F7F5F0; border-radius: 9px; } .ds-menu-info h3 { font-family: Inter, sans-serif; font-size: 15px; font-weight: 600; margin: 0 0 2px; color: #1A1A1A; } .ds-menu-price { font-family: 'Space Mono', monospace; font-size: 13.5px; color: #0B1D33; font-weight: 700; margin: 0; } .ds-qty { display: flex; align-items: center; justify-content: space-between; gap: 10px; } .ds-qty button { width: 30px; height: 30px; border-radius: 50%; background: #F7F5F0; border: 1.5px solid #E4E0D8; color: #0B1D33; font-size: 16px; font-weight: 700; cursor: pointer; } .ds-qty span { font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; min-width: 16px; text-align: center; }"
     },
     {
       "name": "Status Badge",
@@ -220,11 +225,43 @@
       "description": "Header tagline pill: More game. Less lines.",
       "html": "<span class=\"ds-tagline\">More game. Less lines.</span>",
       "css": ".ds-tagline { font-family: 'Space Mono', monospace; font-size: 11.5px; letter-spacing: 0.06em; color: #FD490A; border: 1px solid rgba(253,73,10,0.4); border-radius: 100px; padding: 5px 12px; text-transform: uppercase; display: inline-block; }"
+    },
+    {
+      "name": "Brand Header",
+      "kind": "nav",
+      "refersTo": "brand-header",
+      "description": "Navy authority bar with wordmark, venue context, and tagline chip.",
+      "html": "<header class=\"ds-brand\"><div><p class=\"ds-brand-title\">StadiYums</p><p class=\"ds-brand-context\">Chukchansi Park · Demo</p></div><span class=\"ds-tagline\">More game. Less lines.</span></header>",
+      "css": ".ds-brand { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 16px; background: #0B1D33; color: #F7F5F0; } .ds-brand-title { font-family: 'Archivo Black', sans-serif; font-size: 18px; margin: 0; } .ds-brand-context { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin: 8px 0 0; opacity: 0.7; }"
+    },
+    {
+      "name": "Cart Bar",
+      "kind": "custom",
+      "refersTo": "cart-bar",
+      "description": "Fixed orange bar with mono summary and white checkout CTA.",
+      "html": "<div class=\"ds-cart-bar\"><p class=\"ds-cart-summary\"><b>2</b> items · <b>$18.00</b></p><button class=\"ds-btn-primary\">Place order →</button></div>",
+      "css": ".ds-cart-bar { position: fixed; inset-inline: 0; bottom: 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px; background: #FD490A; color: #fff; } .ds-cart-summary { font-family: 'Space Mono', monospace; font-size: 14px; margin: 0; }"
+    },
+    {
+      "name": "Seat Preview Block",
+      "kind": "custom",
+      "refersTo": "seat-preview-block",
+      "description": "Full-width navy block showing resolved aisle and seat.",
+      "html": "<div class=\"ds-seat-block\"><span>📍</span><p>We'll deliver straight to Aisle 12, Seat 7.</p></div>",
+      "css": ".ds-seat-block { display: flex; align-items: center; gap: 12px; padding: 16px; background: #0B1D33; color: #F7F5F0; font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; } .ds-seat-block span { color: #FD490A; }"
+    },
+    {
+      "name": "Order Stepper",
+      "kind": "custom",
+      "refersTo": "order-stepper",
+      "description": "Four-step milestone dots for fan tracker.",
+      "html": "<div class=\"ds-stepper\"><div class=\"ds-step ds-step-current\">✓</div></div>",
+      "css": ".ds-step { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; } .ds-step-current { background: #FD490A; color: #fff; box-shadow: 0 0 0 5px rgba(253,73,10,0.15); }"
     }
   ],
   "narrative": {
     "northStar": "The End Zone Rush",
-    "overview": "StadiYums looks like the last two minutes of a close game: navy conviction, orange urgency, numbers you can read at arm's length in daylight. The UI is a scoreboard-first mobile tool, not a marketing site. Surfaces stay light because fans use this outdoors in direct sun. Depth comes from tonal blocks, not drop shadows.",
+    "overview": "StadiYums looks like the last two minutes of a close game: navy conviction, orange urgency, numbers you can read at arm's length in daylight. The UI is a scoreboard-first mobile tool, not a marketing site. Surfaces stay light because fans use this outdoors in direct sun. Depth comes from tonal blocks, not drop shadows. Palette matches demo.stadiyums.shop and StadiYums/stadiyums-marketing Brand Commitments; typography here is Operate (Archivo Black + Space Mono), not marketing Persuade (Archivo Narrow).",
     "keyCharacteristics": [
       "Light theme optimized for bright stadium glare",
       "Orange as the action color",

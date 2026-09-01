@@ -7,10 +7,10 @@ colors:
   orange: "#FD490A"
   orange-dim: "#E44309"
   green: "#307C27"
-  cream: "#F5F3EF"
+  cream: "#F7F5F0"
   ink: "#1A1A1A"
-  line: "#0B1D331A"
-  label-muted: "#6B6459"
+  line: "#E4E0D8"
+  label-muted: "#6B7280"
   placeholder: "#A89F8C"
   surface-white: "#FFFFFF"
 typography:
@@ -132,11 +132,11 @@ A committed stadium palette: navy and orange carry identity, cream keeps the bow
 
 ### Neutral
 
-- **Cream** (#F5F3EF): Page background and input fill. The default "paper" of the app in sunlight.
+- **Cream** (#F7F5F0): Page background and input fill. The default "paper" of the app in sunlight.
 - **Ink** (#1A1A1A): Primary body text on light surfaces.
 - **Surface White** (#FFFFFF): Cards, menu items, cart checkout button fill.
-- **Line** (rgba(11,29,51,0.1)): Standard 1px borders on cards, inputs, dividers.
-- **Label Muted** (#6B6459): Field labels, order IDs, queue titles, empty states.
+- **Line** (#E4E0D8): Standard 1px borders on cards, inputs, dividers.
+- **Label Muted** (#6B7280): Field labels, order IDs, queue titles, empty states.
 - **Placeholder** (#A89F8C): Input placeholder text, disabled button labels.
 
 ### Named Rules
@@ -241,7 +241,7 @@ Concrete guardrails for anyone extending this demo into a pilot-ready product.
 
 ### Do:
 
-- **Do** keep the page background cream (#F5F3EF) and cards white for sun readability.
+- **Do** keep the page background cream (#F7F5F0) and cards white for sun readability.
 - **Do** use Space Mono for seats, prices, order IDs, ETAs, and status badges.
 - **Do** use orange (#FD490A) only where the user must act or pay attention now.
 - **Do** size tap targets at 30px minimum (qty buttons, tabs, checkout).
