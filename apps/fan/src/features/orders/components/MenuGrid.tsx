@@ -1,16 +1,15 @@
 "use client";
 
-import { MenuIcon, SectionLabel, money } from "@stadiyums/ui";
+import { MenuIcon, QtyStepper, SectionLabel, money } from "@stadiyums/ui";
 import { MENU } from "../../../lib/menu";
 import { useFan } from "../../../providers/FanProvider";
 
 export function MenuGrid() {
   const { cart, setCart } = useFan();
 
-  const changeQty = (id: string, delta: number) => {
+  const changeQty = (id: string, nextQty: number) => {
     setCart((current) => {
-      const nextQty = Math.max(0, (current[id] ?? 0) + delta);
-      if (nextQty === 0) {
+      if (nextQty <= 0) {
         const next = { ...current };
         delete next[id];
         return next;
@@ -21,7 +20,7 @@ export function MenuGrid() {
 
   return (
     <>
-      <SectionLabel>What can we bring you?</SectionLabel>
+      <SectionLabel variant="action">What can we bring you?</SectionLabel>
       <div className="grid grid-cols-1 gap-3.5 min-[400px]:grid-cols-2">
         {MENU.map((item) => {
           const qty = cart[item.id] ?? 0;
@@ -37,26 +36,12 @@ export function MenuGrid() {
               </div>
               <div>
                 <h3 className="mb-0.5 text-[15px] font-semibold">{item.name}</h3>
-                <p className="mono text-[13.5px] font-bold text-navy">{money(item.price)}</p>
+                <p className="text-[13px] leading-snug text-label-muted">{item.desc}</p>
+                <p className="mono mt-1 text-[13.5px] font-bold text-navy">
+                  {money(item.price)}
+                </p>
               </div>
-              <div className="flex items-center justify-between gap-2.5">
-                <button
-                  type="button"
-                  disabled={qty === 0}
-                  onClick={() => changeQty(item.id, -1)}
-                  className="flex h-[30px] w-[30px] items-center justify-center rounded-full border-[1.5px] border-line bg-cream text-base font-bold text-navy disabled:cursor-default disabled:opacity-30"
-                >
-                  -
-                </button>
-                <span className="mono min-w-4 text-center text-sm font-bold">{qty}</span>
-                <button
-                  type="button"
-                  onClick={() => changeQty(item.id, 1)}
-                  className="flex h-[30px] w-[30px] items-center justify-center rounded-full border-[1.5px] border-line bg-cream text-base font-bold text-navy"
-                >
-                  +
-                </button>
-              </div>
+              <QtyStepper value={qty} onChange={(next) => changeQty(item.id, next)} />
             </div>
           );
         })}

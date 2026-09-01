@@ -1,7 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Button, Card, Input, SectionLabel } from "@stadiyums/ui";
+import { Button, Card, Input, SectionLabel, SeatPreviewBlock } from "@stadiyums/ui";
+import { SectionChips } from "./SectionChips";
 import { useFan } from "../providers/FanProvider";
 
 export function SeatForm() {
@@ -23,11 +24,12 @@ export function SeatForm() {
   };
 
   return (
-    <Card className="mt-8">
-      <SectionLabel>Enter your ticket info</SectionLabel>
-      <div className="mt-3 grid grid-cols-2 gap-3">
+    <Card className="mt-2">
+      <SectionLabel variant="action">Find your seat</SectionLabel>
+      <SectionChips />
+      <div className="mt-4 grid grid-cols-2 gap-3">
         <Input
-          label="Aisle #"
+          label="Row #"
           type="number"
           min={1}
           inputMode="numeric"
@@ -54,12 +56,14 @@ export function SeatForm() {
         />
       </div>
       {seatValidationError ? (
-        <p className="mt-3 text-sm text-orange">Aisle and seat are required.</p>
+        <p className="mt-3 text-sm text-orange-dim">Row and seat are required.</p>
       ) : (
-        <div className="mono mt-4 flex items-center gap-2.5 rounded-md bg-navy px-4 py-3.5 text-sm text-cream">
-          We&apos;ll deliver straight to Aisle {ticket.aisle || "—"}, Seat{" "}
-          {ticket.seat || "—"}.
-        </div>
+        <SeatPreviewBlock
+          className="mt-4"
+          section={ticket.section}
+          aisle={ticket.aisle}
+          seat={ticket.seat}
+        />
       )}
       <Button className="mt-5 w-full" type="button" onClick={continueToOrder}>
         Continue to order

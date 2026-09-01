@@ -11,6 +11,7 @@ import {
 } from "react";
 
 export type FanTicket = {
+  section: string;
   aisle: string;
   seat: string;
 };
@@ -30,7 +31,7 @@ type FanContextValue = {
 
 const FanContext = createContext<FanContextValue | null>(null);
 
-const EMPTY_TICKET: FanTicket = { aisle: "", seat: "" };
+const EMPTY_TICKET: FanTicket = { section: "", aisle: "", seat: "" };
 
 export function FanProvider({ children }: { children: ReactNode }) {
   const [activeOrderId, setActiveOrderId] = useState<string | null>(null);

@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FanShell } from "../components/FanShell";
+import { FanOperateLayout } from "../components/FanOperateLayout";
 import { SeatForm } from "../components/SeatForm";
 import { useFan } from "../providers/FanProvider";
 
@@ -19,15 +19,14 @@ export default function HomePage() {
 
   if (activeOrderId) {
     return (
-      <FanShell title="Loading…" description="Opening your live order tracker." />
+      <FanOperateLayout>
+        <p className="text-sm text-label-muted">Opening your live order tracker…</p>
+      </FanOperateLayout>
     );
   }
 
   return (
-    <FanShell
-      title="Find your seat"
-      description="Confirm aisle and seat before browsing vendors. Full seat localization lands in F1."
-    >
+    <FanOperateLayout>
       <SeatForm />
       {hasSeat ? (
         <p className="mt-4 text-center text-sm text-ink/70">
@@ -40,6 +39,6 @@ export default function HomePage() {
           </Link>
         </p>
       ) : null}
-    </FanShell>
+    </FanOperateLayout>
   );
 }

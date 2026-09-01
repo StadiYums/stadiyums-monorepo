@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Card, SectionLabel, money } from "@stadiyums/ui";
+import { Button, Card, OrderStepper, SectionLabel, money } from "@stadiyums/ui";
 import { getMenuItem, ORDER_STEPS } from "../../../lib/menu";
 import { useFan } from "../../../providers/FanProvider";
 import { useOrder } from "../hooks/use-order";
@@ -15,7 +15,7 @@ export function OrderTracker() {
 
   if (order === null) {
     return (
-      <Card className="mt-8">
+      <Card className="mt-2">
         <p className="text-sm text-label-muted">Order not found.</p>
         <Button
           className="mt-4 w-full"
@@ -44,11 +44,11 @@ export function OrderTracker() {
           : "Your order just hit the kitchen queue.";
 
   return (
-    <Card className="mt-8">
-      <div className="mb-7 flex flex-wrap items-center justify-between gap-3">
+    <Card className="mt-2">
+      <div className="mb-7 flex flex-wrap items-start justify-between gap-3">
         <div>
-          <SectionLabel>Order status</SectionLabel>
-          <h2 className="text-2xl text-navy">
+          <SectionLabel variant="action">Order status</SectionLabel>
+          <h2 className="font-display text-2xl leading-tight text-navy">
             Aisle {order.aisle} · Seat {order.seat}
           </h2>
         </div>
@@ -57,40 +57,14 @@ export function OrderTracker() {
         </span>
       </div>
 
-      <div className="mb-8 flex">
-        {ORDER_STEPS.map((step, index) => {
-          const done = index < stepIdx;
-          const current = index === stepIdx;
-          return (
-            <div key={step.key} className="relative flex-1 text-center">
-              {index > 0 && (
-                <div
-                  className={`absolute top-[17px] left-[-50%] z-[1] h-[3px] w-full ${
-                    done ? "bg-green" : "bg-[var(--step-inactive)]"
-                  }`}
-                />
-              )}
-              <div
-                className={`relative z-[2] mx-auto mb-2.5 flex h-[34px] w-[34px] items-center justify-center rounded-full text-sm font-bold transition-colors duration-300 ${
-                  done
-                    ? "bg-green text-white"
-                    : current
-                      ? "bg-orange text-white shadow-[0_0_0_5px_var(--accent-ring)]"
-                      : "bg-[var(--step-inactive)] text-[var(--step-inactive-text)]"
-                }`}
-              >
-                {index <= stepIdx ? "✓" : index + 1}
-              </div>
-              <span className="mono text-[11px] font-bold uppercase tracking-[0.03em] text-label-muted">
-                {step.label}
-              </span>
-            </div>
-          );
-        })}
-      </div>
+      <OrderStepper
+        className="mb-8"
+        steps={ORDER_STEPS}
+        currentIndex={stepIdx < 0 ? 0 : stepIdx}
+      />
 
       <div className="mb-6 flex items-center gap-3 rounded-md border border-[var(--green-border)] bg-[var(--green-tint)] px-[18px] py-4">
-        <div>
+        <div className="text-sm">
           <b className="mono text-green">
             {order.status === "delivered"
               ? "Delivered"
@@ -122,7 +96,7 @@ export function OrderTracker() {
         </div>
       </div>
 
-      {order.status === "delivered" && (
+      {order.status === "delivered" ? (
         <Button
           variant="secondary"
           className="mt-5 w-full"
@@ -130,7 +104,7 @@ export function OrderTracker() {
         >
           Order again
         </Button>
-      )}
+      ) : null}
     </Card>
   );
 }

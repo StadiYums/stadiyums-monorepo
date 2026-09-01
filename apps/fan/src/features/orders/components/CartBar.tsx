@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Button, money } from "@stadiyums/ui";
+import { OperateCartBar, money } from "@stadiyums/ui";
 import { useRouter } from "next/navigation";
 import { placeOrderAction } from "../actions/place-order";
 import { getMenuItem } from "../../../lib/menu";
@@ -19,8 +19,6 @@ export function CartBar() {
     const item = getMenuItem(id);
     return sum + (item?.price ?? 0) * qty;
   }, 0);
-
-  const visible = count > 0;
 
   const handlePlaceOrder = async () => {
     if (!ticket.aisle.trim() || !ticket.seat.trim()) {
@@ -62,35 +60,15 @@ export function CartBar() {
   };
 
   return (
-    <div
-      className={`fixed inset-x-0 bottom-0 z-40 bg-orange py-4 text-white transition-transform duration-[250ms] ease-out ${
-        visible ? "translate-y-0" : "translate-y-[110%]"
-      }`}
-    >
-      <div className="mx-auto max-w-[520px] px-5">
-        {error && (
-          <p
-            role="alert"
-            className="mb-2 text-center text-sm font-medium text-white/95"
-          >
-            {error}
-          </p>
-        )}
-        <div className="flex items-center justify-between">
-          <div className="text-sm">
-            <b className="mono">{count}</b> items ·{" "}
-            <b className="mono">{money(total)}</b>
-          </div>
-          <Button
-            type="button"
-            disabled={isPlacing}
-            onClick={() => void handlePlaceOrder()}
-          >
-            {isPlacing ? "Placing…" : "Place order →"}
-          </Button>
-        </div>
-      </div>
-    </div>
+    <OperateCartBar
+      visible={count > 0}
+      itemCount={count}
+      totalLabel={money(total)}
+      actionLabel={isPlacing ? "Placing…" : "Place order →"}
+      onAction={() => void handlePlaceOrder()}
+      actionDisabled={isPlacing}
+      error={error}
+    />
   );
 }
 

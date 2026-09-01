@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FanShell } from "../../components/FanShell";
+import { FanOperateLayout } from "../../components/FanOperateLayout";
 import { OrderTracker } from "../../features/orders/components/OrderTracker";
 import { useFan } from "../../providers/FanProvider";
 
@@ -9,14 +9,11 @@ export default function TrackerPage() {
   const { activeOrderId } = useFan();
 
   return (
-    <FanShell
-      title="Order tracker"
-      description="Live milestone timeline for your order."
-    >
+    <FanOperateLayout>
       {activeOrderId ? (
         <OrderTracker />
       ) : (
-        <p className="mt-8 text-sm text-ink/70">
+        <p className="mt-2 text-sm text-ink/70">
           No active order yet.{" "}
           <Link
             href="/order"
@@ -26,6 +23,6 @@ export default function TrackerPage() {
           </Link>
         </p>
       )}
-    </FanShell>
+    </FanOperateLayout>
   );
 }

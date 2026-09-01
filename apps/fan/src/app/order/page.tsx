@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Card, SectionLabel } from "@stadiyums/ui";
 import { CartBar } from "../../features/orders/components/CartBar";
-import { FanShell } from "../../components/FanShell";
+import { FanOperateLayout } from "../../components/FanOperateLayout";
 import { MenuGrid } from "../../features/orders/components/MenuGrid";
 import { useFan } from "../../providers/FanProvider";
 
@@ -25,20 +25,21 @@ export default function OrderPage() {
 
   if (activeOrderId || !hasSeat) {
     return (
-      <FanShell title="Loading…" description="Checking seat and order state." />
+      <FanOperateLayout>
+        <p className="text-sm text-label-muted">Checking seat and order state…</p>
+      </FanOperateLayout>
     );
   }
 
+  const seatLabel = ticket.section
+    ? `Section ${ticket.section} · Row ${ticket.aisle} · Seat ${ticket.seat}`
+    : `Row ${ticket.aisle} · Seat ${ticket.seat}`;
+
   return (
-    <FanShell
-      title="Order"
-      description="Pick your concessions and we'll bring them straight to your seat."
-    >
-      <Card className="mt-8">
-        <SectionLabel>Seat</SectionLabel>
-        <p className="mt-2 text-sm text-ink">
-          Aisle {ticket.aisle} · Seat {ticket.seat}
-        </p>
+    <FanOperateLayout>
+      <Card className="mt-2">
+        <SectionLabel variant="action">Your seat</SectionLabel>
+        <p className="text-sm font-semibold text-navy">{seatLabel}</p>
         <Link
           href="/"
           className="mt-3 inline-block text-sm font-semibold text-orange-dim underline-offset-2 hover:underline"
@@ -52,6 +53,6 @@ export default function OrderPage() {
       </Card>
 
       <CartBar />
-    </FanShell>
+    </FanOperateLayout>
   );
 }

@@ -40,7 +40,7 @@ export default function RootLayout({
           <FanProvider>
             <AppShell width="mobile">{children}</AppShell>
           </FanProvider>
-          <VendorToggle />
+          {process.env.NODE_ENV === "development" ? <VendorToggle /> : null}
         </ThemeProvider>
       </body>
     </html>
