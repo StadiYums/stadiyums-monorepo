@@ -68,6 +68,7 @@ export function CartBar() {
       onAction={() => void handlePlaceOrder()}
       actionDisabled={isPlacing}
       error={error}
+      contentWidth="wide"
     />
   );
 }

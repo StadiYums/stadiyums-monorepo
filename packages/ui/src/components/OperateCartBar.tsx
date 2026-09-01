@@ -10,6 +10,7 @@ type OperateCartBarProps = {
   actionDisabled?: boolean;
   error?: string | null;
   summary?: ReactNode;
+  contentWidth?: "mobile" | "wide";
 };
 
 export function OperateCartBar({
@@ -21,6 +22,7 @@ export function OperateCartBar({
   actionDisabled = false,
   error = null,
   summary,
+  contentWidth = "mobile",
 }: OperateCartBarProps) {
   return (
     <div
@@ -36,7 +38,9 @@ export function OperateCartBar({
       }}
     >
       <div
-        className="mx-auto max-w-[520px]"
+        className={`mx-auto w-full ${
+          contentWidth === "wide" ? "max-w-[1240px]" : "max-w-[520px]"
+        }`}
         style={{
           boxSizing: "border-box",
           paddingInline: "var(--space-page-inline)",

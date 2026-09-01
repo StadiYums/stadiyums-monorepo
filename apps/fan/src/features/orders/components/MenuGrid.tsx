@@ -19,7 +19,15 @@ export function MenuGrid() {
   };
 
   return (
-    <section aria-label="Menu">
+    <section aria-labelledby="menu-heading" className="flex flex-col gap-[var(--space-5)]">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-[var(--space-4)] gap-y-[var(--space-1)]">
+        <h2 id="menu-heading" className="text-xl leading-tight text-navy">
+          Game-day menu
+        </h2>
+        <p className="mono text-[11.5px] font-bold uppercase tracking-[0.08em] text-label-muted">
+          {MENU.length} favorites
+        </p>
+      </div>
       <div className="grid grid-cols-1 gap-[var(--space-3)] min-[480px]:grid-cols-2 lg:grid-cols-3">
         {MENU.map((item) => {
           const qty = cart[item.id] ?? 0;
