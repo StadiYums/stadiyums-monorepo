@@ -1,11 +1,17 @@
 #!/usr/bin/env node
-import { existsSync, mkdirSync, readFileSync } from "node:fs";
+import { existsSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { spawnSync } from "node:child_process";
-import { artifactsDir, pidsDir, readConvexUrl, REPO_ROOT, runId } from "./lib.mjs";
+import {
+  artifactsDir,
+  fanPort,
+  fanUrl,
+  pidsDir,
+  readDatabaseUrl,
+  REPO_ROOT,
+  runId,
+} from "./lib.mjs";
 
-const FAN_PORT = Number(process.env.VERIFY_FAN_PORT ?? process.env.FAN_PORT ?? 3000);
-const FAN_URL = process.env.FAN_URL ?? `http://127.0.0.1:${FAN_PORT}`;
 const RUNNER_PORT = 3001;
 const LANDING_PORT = 3003;
 const VENDOR_PORT = 3004;
@@ -22,13 +28,6 @@ async function portOpen(port) {
   }
 }
 
-function readPid(name) {
-  const path = join(pidsDir(), `${name}.pid`);
-  if (!existsSync(path)) return null;
-  const value = readFileSync(path, "utf8").trim();
-  return value || null;
-}
-
 function fail(message) {
   console.error(`doctor: FAIL — ${message}`);
   process.exit(1);
@@ -39,69 +38,70 @@ function ok(message) {
 }
 
 const id = runId();
+const port = fanPort();
+const url = fanUrl();
 console.log(`doctor: run ${id}`);
 
 if (!existsSync(join(REPO_ROOT, "node_modules"))) {
   fail("node_modules missing — run `pnpm install` at repo root.");
 }
 
-if (!existsSync(join(REPO_ROOT, "apps/fan/.env.local"))) {
+const databaseUrl = readDatabaseUrl();
+if (!databaseUrl) {
   fail(
-    "apps/fan/.env.local missing — symlink to repo root: `ln -sfn ../../.env.local apps/fan/.env.local`",
+    "DATABASE_URL not set — copy .env.example to .env.local and set a Neon PostgreSQL URL, or export DATABASE_URL.",
   );
 }
+ok("DATABASE_URL configured");
 
-let convexUrl;
-try {
-  convexUrl = readConvexUrl();
-  ok(`Convex URL configured (${convexUrl})`);
-} catch (error) {
-  fail(error instanceof Error ? error.message : String(error));
+const migrate = spawnSync("pnpm", ["db:migrate"], {
+  cwd: REPO_ROOT,
+  encoding: "utf8",
+  timeout: 60000,
+  env: { ...process.env, DATABASE_URL: databaseUrl },
+});
+if (migrate.status !== 0) {
+  fail(`db:migrate failed — ${(migrate.stderr || migrate.stdout || "").trim()}`);
 }
+ok("Drizzle migrations applied");
 
-const fanUp = await portOpen(FAN_PORT);
-const fanPid = readPid("fan");
+const seed = spawnSync("pnpm", ["db:seed"], {
+  cwd: REPO_ROOT,
+  encoding: "utf8",
+  timeout: 30000,
+  env: { ...process.env, DATABASE_URL: databaseUrl },
+});
+if (seed.status !== 0) {
+  fail(`db:seed failed — ${(seed.stderr || seed.stdout || "").trim()}`);
+}
+ok("Demo seed reachable (ensureSeeded)");
+
+const fanUp = await portOpen(port);
 if (fanUp) {
-  ok(`Fan app responding on ${FAN_URL}${fanPid ? ` (pid ${fanPid})` : " (not launched by verify)"}`);
+  const fanPid = existsSync(join(pidsDir(id), "fan.pid"))
+    ? " (launched by verify)"
+    : " (not launched by verify)";
+  ok(`Fan app responding at ${url}${fanPid}`);
 } else {
-  fail(`Fan app not reachable at ${FAN_URL}/ — run launch.sh or pnpm dev:fan`);
+  fail(`Fan app not reachable at ${url}/ — run launch.sh or pnpm dev:fan`);
 }
 
-try {
-  const result = spawnSync(
-    "npx",
-    ["convex", "run", "orders:getStats"],
-    { cwd: REPO_ROOT, encoding: "utf8", timeout: 15000 },
-  );
-  if (result.status !== 0) {
-    fail(
-      `Convex query failed — is \`npx convex dev\` running? ${(result.stderr || result.stdout || "").trim()}`,
-    );
-  }
-  ok("Convex deployment answered orders:getStats");
-} catch (error) {
-  fail(
-    `Convex CLI check failed (${error instanceof Error ? error.message : error})`,
-  );
-}
-
-const fanHtml = await fetch(`${FAN_URL}/`).then((r) => r.text());
+const fanHtml = await fetch(`${url}/`).then((r) => r.text());
 if (!fanHtml.includes("Find your seat")) {
-  fail("Fan home page did not render seat setup copy.");
+  fail('Fan home did not render "Find your seat".');
 }
 ok('Fan home shows "Find your seat"');
 
-mkdirSync(artifactsDir(), { recursive: true });
-ok(`Artifacts directory ready at ${artifactsDir()}`);
+mkdirSync(artifactsDir(id), { recursive: true });
+ok(`Artifacts directory ready at ${artifactsDir(id)}`);
 
-const optional = [
+for (const [name, optionalPort] of [
   ["landing", LANDING_PORT],
   ["runner", RUNNER_PORT],
   ["vendor", VENDOR_PORT],
-];
-for (const [name, port] of optional) {
-  if (await portOpen(port)) {
-    console.log(`doctor: note — ${name} also up on :${port}`);
+]) {
+  if (await portOpen(optionalPort)) {
+    console.log(`doctor: note — ${name} also up on :${optionalPort}`);
   }
 }
 

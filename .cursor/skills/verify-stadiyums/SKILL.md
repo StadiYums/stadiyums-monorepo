@@ -1,21 +1,21 @@
 ---
 name: verify-stadiyums
-description: Launch and drive the StadiYums monorepo (Fan PWA primary; Runner, Vendor, Landing secondary) against the shared Convex dev backend. Use when you need scripted proof of user-facing behavior — seat setup, ordering, queue, scaffold logins — with screenshots and ARIA snapshots.
+description: Launch and drive the StadiYums monorepo (Fan PWA primary; Runner, Vendor, Landing secondary) against PostgreSQL + Drizzle. Use when you need scripted proof of user-facing behavior — seat setup, ordering, runner queue, scaffold logins — with screenshots and ARIA snapshots.
 ---
 
 # Verify StadiYums
 
-StadiYums is a **pnpm + Turborepo** monorepo with four Next.js product apps and one local landing page, all backed by **Convex** at the repo root. The primary verification surface is the **Fan PWA** (`http://127.0.0.1:3000`). Secondary surfaces: Runner (`:3001`), System admin (`:3002`), Landing (`:3003`), Vendor (`:3004`).
+StadiYums is a **pnpm + Turborepo** monorepo with four Next.js apps and a local landing page, backed by **PostgreSQL + Drizzle** in `packages/db`. Server Actions in each app call `@stadiyums/db` services.
 
-Read [features/README.md](./features/README.md) before driving. Each feature file is the recipe; this skill covers launch, health checks, harness setup, evidence, and teardown.
+**Primary surface:** Fan PWA at `http://127.0.0.1:3000`. **Secondary:** Runner (`:3001`), System admin (`:3002`), Landing (`:3003`), Vendor (`:3004`).
 
-**Isolation:** Fan cart/seat state lives in React memory only (fresh browser = clean session). **Convex orders persist** in your dev deployment — verification places real rows. Use distinctive aisle/seat values (defaults `42` / `7`) and avoid `demo.resetDemo` unless you intend to wipe seed data.
+Read [features/README.md](./features/README.md) before driving.
 
-**Do not double-drive:** Ports are fixed. If Fan (`3000`) or Convex is already owned by your personal `pnpm dev` / `npx convex dev`, either use that stack (skip `launch.sh`) or stop it first. `launch.sh` refuses to bind when a foreign process holds `:3000`.
+**Isolation:** Fan cart/seat/active-order state is React memory only (fresh browser context = clean session). **Orders persist in PostgreSQL** — verification inserts real rows. Use distinctive aisle/seat values (defaults `42` / `7`).
+
+**Do not double-drive:** Ports are fixed. If Fan (`3000`) is already in use by your personal `pnpm dev:fan`, either reuse that stack (skip `launch.sh`, run `doctor` only) or stop it first. `launch.sh` exits when a foreign process owns the port.
 
 ## Launch
-
-From repo root, with helpers on your path or via explicit paths under `.cursor/skills/verify-stadiyums/scripts/`.
 
 ```bash
 export VERIFY_RUN_ID="verify-$(date +%s)"
@@ -25,125 +25,108 @@ bash .cursor/skills/verify-stadiyums/scripts/launch.sh
 `launch.sh`:
 
 1. Creates `.verification/stadiyums/$VERIFY_RUN_ID/{pids,artifacts,logs}`.
-2. Ensures `apps/fan/.env.local` symlinks to repo-root `.env.local`.
-3. Starts `npx convex dev` only if nothing is listening on Convex's local port and no foreign blocker — otherwise assumes your existing Convex dev process.
-4. Starts `pnpm --filter @stadiyums/fan dev` on **:3000** if the port is free.
-5. Waits until `curl -fsS http://127.0.0.1:3000/` succeeds.
+2. Resolves `DATABASE_URL` (see **Database** below).
+3. Runs `pnpm db:migrate` and `pnpm db:seed`.
+4. Symlinks `apps/fan/.env.local` → `../../.env.local` when missing.
+5. Starts Fan on **:3000** (override with `VERIFY_FAN_PORT`) and waits for HTTP 200.
 
-**Ready signals:** Fan home returns HTTP 200 and renders the heading **Find your seat**. Convex responds at `NEXT_PUBLIC_CONVEX_URL` from `.env.local`.
+**Ready signal:** Fan home returns **Find your seat**.
 
-**Prerequisites (one-time):**
+**One-time setup:**
 
 ```bash
 pnpm install
-npx convex dev   # creates .env.local; keep running or let launch.sh start it
-ln -sfn ../../.env.local apps/fan/.env.local
-cd .cursor/skills/verify-stadiyums/scripts && npm install && npx playwright install chromium
+cp .env.example .env.local   # set DATABASE_URL to your Neon dev database
+npx playwright install chromium
 ```
 
-**Teardown** (see Cleanup) — always export the same `VERIFY_RUN_ID` you used for launch.
+**Database:** `DATABASE_URL` must be set in repo-root `.env.local` (see `.env.example`). The app uses `@neondatabase/serverless` — use a **Neon** (or Neon-compatible) connection string. Local Docker Postgres is not supported by the current driver.
+
+`launch.sh` runs `pnpm db:migrate` and `pnpm db:seed` against that URL.
 
 ## Doctor
 
-Run after launch (or when reusing an already-running dev stack):
-
 ```bash
-export VERIFY_RUN_ID="verify-..."   # same id if you launched via launch.sh
+export VERIFY_RUN_ID="verify-..."   # same id if you used launch.sh
 node .cursor/skills/verify-stadiyums/scripts/doctor.mjs
 ```
 
-Doctor is read-only. It checks:
+Read-only checks:
 
-- `pnpm install` has been run (`node_modules` exists).
-- `apps/fan/.env.local` exists.
-- `NEXT_PUBLIC_CONVEX_URL` is set and the deployment answers.
-- Fan `:3000` serves HTML containing **Find your seat**.
-- The artifacts directory for this run exists.
+- `node_modules` exists.
+- `DATABASE_URL` is set.
+- `pnpm db:migrate` and `pnpm db:seed` succeed.
+- Fan serves HTML containing **Find your seat**.
+- Artifacts directory exists for this run.
 
-Exit code `0` = safe to drive. Non-zero = fix the reported precondition before continuing.
+Exit `0` = safe to drive.
 
 ## Drive
 
-Harness: **Playwright** (Chromium) via scripts in `.cursor/skills/verify-stadiyums/scripts/`. Install deps once in that directory (`npm install`, `npx playwright install chromium`).
+Harness: **Playwright** (`@playwright/test` at repo root). Install browsers once: `npx playwright install chromium`.
 
-Pick a feature from [features/](./features/). Run its scripted driver or follow its labeled browser steps.
-
-**Bundled driver — fan place order** (baseline proof):
+Pick a feature from [features/](./features/). Bundled driver for the baseline proof:
 
 ```bash
 export VERIFY_RUN_ID="verify-..."
 node .cursor/skills/verify-stadiyums/scripts/drive-fan-place-order.mjs
 ```
 
-This script:
+Flow: aisle `42`, seat `7` → add **Hot Dog** → **Place order →** → **Order tracker** with `#SY-` number and line items.
 
-1. Opens Fan home.
-2. Fills aisle `42`, seat `7` (override with `VERIFY_AISLE` / `VERIFY_SEAT`).
-3. Adds one **Hot Dog**, places the order.
-4. Waits for **Order tracker** with order line items and `#SY-` order number.
+Override with `FAN_URL`, `VERIFY_AISLE`, `VERIFY_SEAT`.
 
-Override base URL with `FAN_URL` if needed.
+Stable selectors:
 
-For Runner/Vendor/Landing features without bundled drivers, use Playwright interactively or extend `scripts/` following the selectors in each feature file. Prefer:
+- `getByRole('heading', { name: 'Find your seat' })`
+- `getByPlaceholder('e.g. 12')` / `getByPlaceholder('e.g. 8')`
+- `getByRole('button', { name: 'Continue to order' })`
+- Menu card via `getByRole('heading', { name: 'Hot Dog' })` then `+`
+- `getByRole('button', { name: 'Place order →' })`
 
-- `getByRole('heading', { name: '...' })`
-- `getByRole('button', { name: '...' })`
-- `getByPlaceholder('e.g. 12')` for fan seat fields
-- Menu cards located via `getByRole('heading', { name: 'Hot Dog' })` then `+` within the card
+Existing visual regression harness: `pnpm test:visual` (geometry + screenshots; starts apps via `playwright.config.ts`).
 
 ## Evidence
 
-Artifacts for run `$VERIFY_RUN_ID` live at:
-
-```text
-.verification/stadiyums/$VERIFY_RUN_ID/artifacts/
-```
+Artifacts: `.verification/stadiyums/$VERIFY_RUN_ID/artifacts/`
 
 **Proof standards:**
 
-- Exercise the real user path (browser UI → Convex mutation), not internal-only helpers.
-- Capture **action + resulting state**: e.g. cart count before place, tracker heading and line items after.
-- Include app identity in screenshots (Fan shell eyebrow **StadiYums**, page title).
-- For mutations, prefer a second read-only view (tracker query UI) over trusting the click alone.
-- Record `feature` id and entry point in the log file beside each artifact set.
+- Exercise the real user path (browser → Server Action → PostgreSQL), not test-only shortcuts.
+- Capture action **and** resulting state (tracker line items after place, not just the click).
+- Include StadiYums chrome in screenshots.
+- Confirm DB side effects via the tracker UI (polls `getOrderAction` every 2s).
 
-Bundled `drive-fan-place-order.mjs` writes:
+`drive-fan-place-order.mjs` writes:
 
-- `fan-place-order.aria.txt` — main landmark snapshot
-- `fan-place-order.png` — full-page screenshot
-- `fan-place-order.log` — step list
+- `fan-place-order.aria.txt`
+- `fan-place-order.png`
+- `fan-place-order.log`
 
 ## Cleanup
 
-Stops only processes whose PIDs were recorded under this run's `pids/` directory. **Does not delete artifacts.**
+Stops only Fan PID and Docker container recorded for this run. **Keeps artifacts.**
 
 ```bash
-export VERIFY_RUN_ID="verify-..."   # must match launch
+export VERIFY_RUN_ID="verify-..."
 bash .cursor/skills/verify-stadiyums/scripts/cleanup.sh
 ```
 
-After cleanup, confirm proof files still exist under `.verification/stadiyums/$VERIFY_RUN_ID/artifacts/`. If cleanup removed them, fix `cleanup.sh` before relying on the skill.
-
-Never `killall node` or kill by port alone without checking ownership — you may terminate the user's unrelated dev stack.
+After cleanup, confirm artifacts still exist. Never `killall node`.
 
 ## Helpers
 
 | Script | Purpose |
 |--------|---------|
-| `scripts/launch.sh` | Start Convex (if needed) + Fan; write PIDs |
+| `scripts/bootstrap-db.sh` | Resolve `DATABASE_URL` into run state |
+| `scripts/launch.sh` | Migrate, seed, start Fan |
 | `scripts/doctor.mjs` | Read-only health gate |
 | `scripts/drive-fan-place-order.mjs` | End-to-end fan order proof |
-| `scripts/cleanup.sh` | Stop PIDs from this run; keep artifacts |
-| `scripts/lib.mjs` | Shared paths (`REPO_ROOT`, `runDir`, `readConvexUrl`) |
+| `scripts/cleanup.sh` | Stop Fan started by this run |
+| `scripts/lib.mjs` | Shared paths and env helpers |
 
-Run Playwright drivers from `scripts/` so `import 'playwright'` resolves:
-
-```bash
-cd .cursor/skills/verify-stadiyums/scripts
-export VERIFY_RUN_ID=...
-node drive-fan-place-order.mjs
-```
+Run all Node helpers from **repo root** so `@playwright/test` resolves.
 
 ## Maintenance
 
-When routes, copy, or auth rules change, update the matching file under [features/](./features/). Use `/maintain-verification-skill` to audit the map against the codebase.
+Update [features/](./features/) when routes or copy change. Use `/maintain-verification-skill` to audit the map against the codebase.

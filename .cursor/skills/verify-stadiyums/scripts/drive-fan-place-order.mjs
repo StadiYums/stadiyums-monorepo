@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 /**
- * Drives the fan PWA: seat setup → add item → place order → tracker proof.
- * Usage: VERIFY_RUN_ID=... node drive-fan-place-order.mjs
+ * Fan PWA proof: seat → menu → place order → tracker (Drizzle / Server Actions).
+ * Run from repo root: node .cursor/skills/verify-stadiyums/scripts/drive-fan-place-order.mjs
  */
 import { writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { chromium } from "playwright";
-import { artifactsDir, ensureRunLayout, runId } from "./lib.mjs";
+import { chromium } from "@playwright/test";
+import { artifactsDir, ensureRunLayout, fanUrl, runId } from "./lib.mjs";
 
-const FAN_URL = process.env.FAN_URL ?? "http://127.0.0.1:3000";
 const AISLE = process.env.VERIFY_AISLE ?? "42";
 const SEAT = process.env.VERIFY_SEAT ?? "7";
+const FAN_URL = fanUrl();
 
 const id = runId();
 ensureRunLayout(id);
@@ -20,7 +20,6 @@ const feature = "fan-place-order";
 async function main() {
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
-
   const log = [];
   const step = async (name, fn) => {
     log.push(`STEP ${name}`);
@@ -41,14 +40,19 @@ async function main() {
   });
 
   await step("add-hot-dog", async () => {
-    const card = page.locator("div").filter({ has: page.getByRole("heading", { name: "Hot Dog" }) }).first();
+    const card = page
+      .locator("div")
+      .filter({ has: page.getByRole("heading", { name: "Hot Dog" }) })
+      .first();
     await card.getByRole("button", { name: "+" }).click();
     await page.getByText("1 items").waitFor();
   });
 
   await step("place-order", async () => {
     await page.getByRole("button", { name: "Place order →" }).click();
-    await page.getByRole("heading", { name: "Order tracker" }).waitFor({ timeout: 15000 });
+    await page.getByRole("heading", { name: "Order tracker" }).waitFor({
+      timeout: 20000,
+    });
   });
 
   await step("tracker-proof", async () => {
@@ -64,11 +68,12 @@ async function main() {
   const snapshot = await page.locator("main").ariaSnapshot();
   writeFileSync(ariaPath, snapshot, "utf8");
   await page.screenshot({ path: shotPath, fullPage: true });
-  writeFileSync(logPath, log.join("\n") + "\n", "utf8");
+  writeFileSync(logPath, `${log.join("\n")}\n`, "utf8");
 
   await browser.close();
-
-  console.log(JSON.stringify({ feature, runId: id, ariaPath, shotPath, logPath }, null, 2));
+  console.log(
+    JSON.stringify({ feature, runId: id, ariaPath, shotPath, logPath }, null, 2),
+  );
 }
 
 main().catch((error) => {

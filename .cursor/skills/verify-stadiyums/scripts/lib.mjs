@@ -29,14 +29,26 @@ export function ensureRunLayout(id = runId()) {
   mkdirSync(pidsDir(id), { recursive: true });
 }
 
-export function readConvexUrl() {
+export function fanPort() {
+  return Number(process.env.VERIFY_FAN_PORT ?? process.env.FAN_PORT ?? 3000);
+}
+
+export function fanUrl() {
+  return process.env.FAN_URL ?? `http://127.0.0.1:${fanPort()}`;
+}
+
+export function readDatabaseUrl() {
+  if (process.env.DATABASE_URL?.trim()) {
+    return process.env.DATABASE_URL.trim();
+  }
+  const runStateUrl = join(runDir(), "database.url");
+  if (existsSync(runStateUrl)) {
+    return readFileSync(runStateUrl, "utf8").trim();
+  }
   const envPath = join(REPO_ROOT, ".env.local");
   if (!existsSync(envPath)) {
-    throw new Error("Missing repo-root .env.local — run `npx convex dev` once to create it.");
+    return null;
   }
-  const match = readFileSync(envPath, "utf8").match(/^NEXT_PUBLIC_CONVEX_URL=(.+)$/m);
-  if (!match?.[1]) {
-    throw new Error("NEXT_PUBLIC_CONVEX_URL not found in .env.local");
-  }
-  return match[1].trim();
+  const match = readFileSync(envPath, "utf8").match(/^DATABASE_URL=(.+)$/m);
+  return match?.[1]?.trim() ?? null;
 }

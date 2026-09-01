@@ -3,12 +3,12 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../../../.." && pwd)"
-export VERIFY_RUN_ID="${VERIFY_RUN_ID:-run-$(date +%s)}"
+export VERIFY_RUN_ID="${VERIFY_RUN_ID:-verify-$(date +%s)}"
 RUN_DIR="$REPO_ROOT/.verification/stadiyums/$VERIFY_RUN_ID"
 PID_DIR="$RUN_DIR/pids"
 ARTIFACTS_DIR="$RUN_DIR/artifacts"
-FAN_PORT="${VERIFY_FAN_PORT:-${FAN_PORT:-3000}}"
 LOG_DIR="$RUN_DIR/logs"
+FAN_PORT="${VERIFY_FAN_PORT:-${FAN_PORT:-3000}}"
 
 mkdir -p "$PID_DIR" "$ARTIFACTS_DIR" "$LOG_DIR"
 
@@ -22,16 +22,17 @@ pid_alive() {
 
 foreign_listener() {
   local port="$1"
-  local our_pid_file="$PID_DIR/$2.pid"
-  local our_pid=""
+  local name="$2"
+  local our_pid_file="$PID_DIR/$name.pid"
   if [[ -f "$our_pid_file" ]]; then
+    local our_pid
     our_pid="$(cat "$our_pid_file")"
     if pid_alive "$our_pid"; then
       return 1
     fi
   fi
   if port_in_use "$port"; then
-    echo "launch: port $port already in use by another process — stop it or use your existing dev stack and skip launch." >&2
+    echo "launch: port $port already in use — stop the other process or reuse your dev stack and skip launch." >&2
     exit 1
   fi
   return 0
@@ -39,66 +40,54 @@ foreign_listener() {
 
 ensure_fan_env() {
   local target="$REPO_ROOT/apps/fan/.env.local"
-  if [[ ! -e "$target" ]]; then
+  if [[ ! -e "$target" ]] && [[ -f "$REPO_ROOT/.env.local" ]]; then
     ln -sfn ../../.env.local "$target"
     echo "launch: linked apps/fan/.env.local -> ../../.env.local"
   fi
 }
 
-start_convex() {
-  if [[ -f "$PID_DIR/convex.pid" ]] && pid_alive "$(cat "$PID_DIR/convex.pid")"; then
-    echo "launch: convex already running (pid $(cat "$PID_DIR/convex.pid"))"
-    return
-  fi
-  if [[ -z "${VERIFY_ALLOW_FOREIGN_CONVEX:-}" ]] && [[ -f "$REPO_ROOT/.env.local" ]]; then
-  echo "launch: assuming convex dev may already be running for this deployment"
-  else
-    foreign_listener 3210 convex || true
-  fi
-  if port_in_use 3210; then
-    echo "launch: convex dev appears to be running (port 3210 listening)"
-    return
-  fi
+bootstrap_database() {
+  # shellcheck disable=SC1091
+  source "$SCRIPT_DIR/bootstrap-db.sh"
+  export DATABASE_URL
   (
     cd "$REPO_ROOT"
-    npx convex dev >"$LOG_DIR/convex.log" 2>&1 &
-    echo $! >"$PID_DIR/convex.pid"
+    pnpm db:migrate
+    pnpm db:seed
   )
-  echo "launch: started convex dev (pid $(cat "$PID_DIR/convex.pid"))"
-}
-
-wait_for_fan() {
-  local attempts=60
-  for ((i = 1; i <= attempts; i++)); do
-    if curl -fsS "http://127.0.0.1:$FAN_PORT/" >/dev/null 2>&1; then
-      echo "launch: fan ready on :$FAN_PORT"
-      return 0
-    fi
-    sleep 1
-  done
-  echo "launch: fan did not become ready within ${attempts}s — see $LOG_DIR/fan.log" >&2
-  exit 1
 }
 
 start_fan() {
   if [[ -f "$PID_DIR/fan.pid" ]] && pid_alive "$(cat "$PID_DIR/fan.pid")"; then
     echo "launch: fan already running (pid $(cat "$PID_DIR/fan.pid"))"
-    wait_for_fan
     return
   fi
   foreign_listener "$FAN_PORT" fan
   ensure_fan_env
   (
-    cd "$REPO_ROOT"
-    pnpm --filter @stadiyums/fan dev >"$LOG_DIR/fan.log" 2>&1 &
+    cd "$REPO_ROOT/apps/fan"
+    DATABASE_URL="${DATABASE_URL:-}" pnpm exec next dev --port "$FAN_PORT" >"$LOG_DIR/fan.log" 2>&1 &
     echo $! >"$PID_DIR/fan.pid"
   )
-  echo "launch: started fan (pid $(cat "$PID_DIR/fan.pid"))"
-  wait_for_fan
+  echo "launch: started fan on :$FAN_PORT (pid $(cat "$PID_DIR/fan.pid"))"
+}
+
+wait_for_fan() {
+  local attempts=90
+  for ((i = 1; i <= attempts; i++)); do
+    if curl -fsS "http://127.0.0.1:$FAN_PORT/" >/dev/null 2>&1; then
+      echo "launch: fan ready at http://127.0.0.1:$FAN_PORT"
+      return 0
+    fi
+    sleep 1
+  done
+  echo "launch: fan did not become ready — see $LOG_DIR/fan.log" >&2
+  exit 1
 }
 
 echo "launch: VERIFY_RUN_ID=$VERIFY_RUN_ID"
-start_convex
+bootstrap_database
 start_fan
+wait_for_fan
 echo "launch: run directory $RUN_DIR"
-echo "launch: next — node scripts/doctor.mjs (with VERIFY_RUN_ID exported)"
+echo "launch: next — node .cursor/skills/verify-stadiyums/scripts/doctor.mjs"
