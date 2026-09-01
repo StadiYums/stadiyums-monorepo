@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { BrandHeader, PLATFORM_HEADER_CONTEXT, PLATFORM_TAGLINE } from "@stadiyums/ui";
+import { BrandHeader } from "@stadiyums/ui";
 
 type FanOperateLayoutProps = {
   children: ReactNode;
@@ -14,7 +14,7 @@ export function FanOperateLayout({
 }: FanOperateLayoutProps) {
   return (
     <div className="flex min-h-full flex-col bg-cream">
-      <BrandHeader context={PLATFORM_HEADER_CONTEXT} tagline={PLATFORM_TAGLINE} />
+      <BrandHeader logoSrc="/stadiyums-mark.png" logoAlt="StadiYums" />
       <div
         className={`mx-auto w-full flex-1 px-[var(--space-page-inline)] pt-[var(--space-page-block)] ${
           width === "wide"

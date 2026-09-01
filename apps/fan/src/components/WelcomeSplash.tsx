@@ -42,15 +42,17 @@ export function WelcomeSplash() {
         aria-labelledby="splash-hero-heading"
         className="overflow-hidden rounded-[16px] border border-navy bg-navy text-cream"
       >
+        <div className="px-[var(--space-6)] pb-0 pt-[var(--space-8)] sm:px-[var(--space-8)] lg:px-[var(--space-10)] lg:pt-[var(--space-10)]">
+          <h1
+            id="splash-hero-heading"
+            className="mx-auto max-w-[18ch] text-center font-display text-[clamp(2.35rem,7vw,5.25rem)] leading-[0.94] tracking-[-0.035em] text-cream"
+          >
+            Your seat is the best place to order.
+          </h1>
+        </div>
         <div className="grid lg:grid-cols-[1.07fr_0.93fr]">
-          <div className="flex flex-col px-[var(--space-6)] py-[var(--space-8)] sm:px-[var(--space-8)] lg:px-[var(--space-10)] lg:py-[var(--space-10)]">
-            <h1
-              id="splash-hero-heading"
-              className="max-w-[10ch] font-display text-[clamp(2.35rem,7vw,5.25rem)] leading-[0.94] tracking-[-0.035em] text-cream"
-            >
-              Your seat is the best place to order.
-            </h1>
-            <p className="mt-[var(--space-5)] max-w-[47ch] text-[15px] leading-relaxed text-cream/75 sm:text-base">
+          <div className="flex flex-col px-[var(--space-6)] pb-[var(--space-8)] pt-[var(--space-6)] sm:px-[var(--space-8)] lg:px-[var(--space-10)] lg:pb-[var(--space-10)] lg:pt-[var(--space-8)]">
+            <p className="max-w-[47ch] text-[15px] leading-relaxed text-cream/75 sm:text-base">
               Concessions come to your seat, so you can keep your eyes on the action.
               Your vendor and a stadium runner take it from there.
             </p>
