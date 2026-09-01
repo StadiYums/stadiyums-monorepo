@@ -26,7 +26,7 @@ export function BrandHeader({
             <img
               src={logoSrc}
               alt={logoAlt}
-              className="h-10 w-10 shrink-0 rounded-full border border-cream/20"
+              className="stadiyums-brand-header__mark"
             />
           ) : null}
           <div>
