@@ -8,7 +8,7 @@ StadiYums is the **ordering platform**. The venue is the **experience**. Fans se
 
 ## 5-minute demo flow
 
-Run Convex (`npx convex dev`) and the apps (`pnpm dev`). Open the landing page at [http://localhost:3003](http://localhost:3003) or jump straight to each port.
+Run the database and apps (`pnpm db:migrate && pnpm db:seed && pnpm dev`). Open the landing page at [http://localhost:3003](http://localhost:3003) or jump straight to each port.
 
 | Step | Action | What to say |
 |------|--------|-------------|

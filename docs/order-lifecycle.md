@@ -36,7 +36,7 @@ Writers must pass `expectedStatusVersion` and bump `statusVersion` on success. R
 
 ## Legacy demo mapping
 
-Existing demo `convex/orders.ts` still advances:
+Demo `orderService.advanceOrder` still advances:
 
 `placed → preparing → on_the_way → delivered`
 
@@ -49,4 +49,4 @@ Existing demo `convex/orders.ts` still advances:
 
 `on_the_way` remains in the schema union until demo data and writers migrate. New writers must not emit `on_the_way`.
 
-Source of truth for edges: `convex/lib/orderTransitions.ts`.
+Source of truth for edges: `packages/db/src/lib/order-transitions.ts`.

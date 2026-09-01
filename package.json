@@ -8,9 +8,13 @@
     "build": "turbo run build",
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
-    "test": "node --experimental-strip-types --test convex/lib/**/*.test.ts",
+    "test": "node --experimental-strip-types --test packages/db/src/lib/**/*.test.ts",
     "test:visual": "playwright test",
     "test:visual:update": "playwright test --update-snapshots",
+    "db:generate": "pnpm --filter @stadiyums/db db:generate",
+    "db:migrate": "pnpm --filter @stadiyums/db db:migrate",
+    "db:studio": "pnpm --filter @stadiyums/db db:studio",
+    "db:seed": "pnpm --filter @stadiyums/db db:seed",
     "dev:landing": "pnpm --filter @stadiyums/landing dev",
     "dev:fan": "pnpm --filter @stadiyums/fan dev",
     "dev:runner": "pnpm --filter @stadiyums/runner dev",
@@ -19,11 +23,9 @@
   },
   "dependencies": {
     "@stadiyums/types": "workspace:*",
-    "@stadiyums/ui": "workspace:*",
-    "convex": "^1.32.0"
+    "@stadiyums/ui": "workspace:*"
   },
   "devDependencies": {
-    "@convex-dev/eslint-plugin": "^1.1.0",
     "@playwright/test": "1.62.0",
     "eslint": "^9",
     "turbo": "^2.5.4",

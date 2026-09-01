@@ -1,0 +1,30 @@
+{
+  "name": "@stadiyums/db",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./schema": "./src/schema/index.ts",
+    "./services": "./src/services/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
+    "db:seed": "tsx src/seed.ts"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^0.10.4",
+    "@stadiyums/types": "workspace:*",
+    "drizzle-orm": "^0.38.4"
+  },
+  "devDependencies": {
+    "@stadiyums/config": "workspace:*",
+    "@types/node": "^20",
+    "drizzle-kit": "^0.30.4",
+    "tsx": "^4.19.3",
+    "typescript": "^5"
+  }
+}

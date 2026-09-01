@@ -1,4 +1,5 @@
 import { type HTMLAttributes, type ReactNode } from "react";
+import { Card as UiCard } from "./ui/card";
 
 type CardVariant = "default" | "menu" | "workflow" | "metric" | "alert";
 
@@ -14,17 +15,14 @@ type CardProps = HTMLAttributes<HTMLDivElement> & {
   variant?: CardVariant;
 };
 
-/** Warm bordered surface — 16px radius, compact padding (stadiyums.shop). */
+/** Warm bordered surface — shadcn Card with stadium variants. */
 export function Card({
   className = "",
   variant = "default",
   ...props
 }: CardProps) {
   return (
-    <div
-      className={`flex flex-col rounded-lg border border-line bg-surface-white p-3.5 text-ink shadow-none ${VARIANT_CLASS[variant]} ${className}`}
-      {...props}
-    />
+    <UiCard className={`${VARIANT_CLASS[variant]} ${className}`} {...props} />
   );
 }
 
