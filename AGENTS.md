@@ -37,6 +37,10 @@ An anti-pattern or accessibility scan is not a complete UI review. When creating
 editing, or reviewing product UI, inspect the change against the surrounding
 surface and shared primitives before calling it finished.
 
+For every Impeccable layout or refinement pass, load and complete the local
+`rendered-uniformity-review` skill. Its rendered geometry gate is required even
+when a design detector is clean.
+
 Required consistency pass:
 
 1. Compare the element with its nearest peers: spacing token, alignment, type,

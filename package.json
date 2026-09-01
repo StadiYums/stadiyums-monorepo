@@ -11,6 +11,7 @@
     "test": "node --experimental-strip-types --test packages/db/src/lib/**/*.test.ts",
     "test:visual": "playwright test",
     "test:visual:update": "playwright test --update-snapshots",
+    "test:visual:order-layout": "FAN_VISUAL_URL=http://127.0.0.1:3100 playwright test -c playwright.order-layout.config.ts",
     "db:generate": "pnpm --filter @stadiyums/db db:generate",
     "db:migrate": "pnpm --filter @stadiyums/db db:migrate",
     "db:studio": "pnpm --filter @stadiyums/db db:studio",

@@ -10,6 +10,17 @@ decisions.
 
 Neither pass replaces the other.
 
+The executable companion is the local
+[`rendered-uniformity-review`](../../.agents/skills/rendered-uniformity-review/SKILL.md)
+skill. Use it for every Impeccable layout or refinement change; where a route
+has a visual test harness, encode the observed contract so future changes cannot
+silently reintroduce the same defect.
+
+Run the fan order contract with `pnpm test:visual:order-layout`. It checks
+rendered dock positioning and insets, seat-card icon inset, card-media density,
+the responsive menu topology, and horizontal overflow at phone and desktop
+sizes.
+
 ## Reviewer checklist
 
 For every changed UI surface, compare the change with the rest of the page and
