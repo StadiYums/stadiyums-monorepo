@@ -1,8 +1,9 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Button, Input, SeatPreviewBlock } from "@stadiyums/ui";
+import { Button, Input } from "@stadiyums/ui";
 import { SectionChips } from "./SectionChips";
+import { SeatSelectionPreview } from "./SeatSelectionPreview";
 import { useFan } from "../providers/FanProvider";
 
 export function SeatForm() {
@@ -42,6 +43,12 @@ export function SeatForm() {
         </p>
       </header>
 
+      <SeatSelectionPreview
+        section={ticket.section}
+        aisle={ticket.aisle}
+        seat={ticket.seat}
+      />
+
       <SectionChips />
 
       <div className="grid grid-cols-2 gap-[var(--space-3)]">
@@ -80,12 +87,6 @@ export function SeatForm() {
             : "Enter your row and seat to continue."}
         </p>
       ) : null}
-
-      <SeatPreviewBlock
-        section={ticket.section}
-        aisle={ticket.aisle}
-        seat={ticket.seat}
-      />
 
       <Button
         className="min-h-14 w-full text-[15px]"
