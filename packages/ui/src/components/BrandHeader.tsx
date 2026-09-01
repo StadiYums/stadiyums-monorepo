@@ -15,7 +15,7 @@ export function BrandHeader({
   trailing,
 }: BrandHeaderProps) {
   return (
-    <header className="bg-navy px-4 py-4 text-cream">
+    <header className="bg-navy px-[var(--space-page-inline)] pb-[var(--space-header-block-end)] pt-[var(--space-header-block-start)] text-cream">
       <div className="mx-auto flex w-full max-w-[520px] items-start justify-between gap-3 md:max-w-6xl">
         <div>
           <p className="font-display text-lg leading-none tracking-tight">{title}</p>

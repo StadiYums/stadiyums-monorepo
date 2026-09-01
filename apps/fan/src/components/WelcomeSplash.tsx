@@ -37,25 +37,25 @@ export function WelcomeSplash() {
   const { hasSeat } = useFan();
 
   return (
-    <main className="mx-auto flex w-full max-w-[1120px] flex-col gap-8 pb-4 md:gap-10 lg:justify-center">
+    <main className="mx-auto flex w-full max-w-[1120px] flex-col gap-[var(--space-section)] pb-[var(--space-4)] lg:justify-center">
       <section
         aria-labelledby="splash-hero-heading"
         className="overflow-hidden rounded-[16px] border border-navy bg-navy text-cream"
       >
         <div className="grid lg:grid-cols-[1.07fr_0.93fr]">
-          <div className="flex flex-col px-5 py-7 min-[400px]:px-6 sm:px-8 sm:py-9 lg:px-10 lg:py-9">
+          <div className="flex flex-col px-[var(--space-6)] py-[var(--space-8)] sm:px-[var(--space-8)] lg:px-[var(--space-10)] lg:py-[var(--space-10)]">
             <h1
               id="splash-hero-heading"
               className="max-w-[10ch] font-display text-[clamp(2.35rem,7vw,5.25rem)] leading-[0.94] tracking-[-0.035em] text-cream"
             >
               Your seat is the best place to order.
             </h1>
-            <p className="mt-5 max-w-[47ch] text-[15px] leading-relaxed text-cream/75 sm:text-base">
+            <p className="mt-[var(--space-5)] max-w-[47ch] text-[15px] leading-relaxed text-cream/75 sm:text-base">
               Concessions come to your seat, so you can keep your eyes on the action.
               Your vendor and a stadium runner take it from there.
             </p>
 
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-[var(--space-8)] flex flex-col gap-[var(--space-3)] sm:flex-row">
               <Button
                 type="button"
                 className="min-h-14 flex-1 bg-orange text-[15px] text-cream hover:bg-orange-2 active:bg-orange-dim sm:flex-none sm:px-8"
@@ -74,7 +74,7 @@ export function WelcomeSplash() {
             </div>
 
             {hasSeat ? (
-              <p className="mt-5 text-sm text-cream/70">
+              <p className="mt-[var(--space-5)] text-sm text-cream/70">
                 Your seat is saved. {" "}
                 <Link
                   href="/order"
@@ -86,12 +86,12 @@ export function WelcomeSplash() {
             ) : null}
           </div>
 
-          <div className="relative border-t border-cream/15 bg-navy-deep px-5 py-5 sm:px-8 sm:py-6 lg:min-h-[290px] lg:border-l lg:border-t-0 lg:px-10 lg:py-8">
+          <div className="relative border-t border-cream/15 bg-navy-deep px-[var(--space-6)] py-[var(--space-6)] sm:px-[var(--space-8)] lg:min-h-[290px] lg:border-l lg:border-t-0 lg:px-[var(--space-10)] lg:py-[var(--space-8)]">
             <div className="absolute -right-20 -top-24 h-56 w-56 rounded-full border-[28px] border-orange/15" />
             <p className="mono relative text-[11px] font-bold uppercase tracking-[0.12em] text-cream/55">
               The play call
             </p>
-            <div className="relative mt-5 flex items-end justify-between border-b border-cream/25 pb-5">
+            <div className="relative mt-[var(--space-5)] flex items-end justify-between border-b border-cream/25 pb-[var(--space-5)]">
               <div>
                 <p className="mono text-[12px] font-bold uppercase tracking-[0.1em] text-orange">
                   Home section
@@ -104,7 +104,7 @@ export function WelcomeSplash() {
                 In the action
               </span>
             </div>
-            <div className="relative mt-4 grid grid-cols-2 gap-3 lg:hidden">
+            <div className="relative mt-[var(--space-4)] grid grid-cols-2 gap-[var(--space-3)] lg:hidden">
               <div>
                 <p className="mono text-[10px] font-bold uppercase tracking-[0.1em] text-orange">From</p>
                 <p className="mt-1 text-sm font-semibold text-cream">Your seat</p>
@@ -114,7 +114,7 @@ export function WelcomeSplash() {
                 <p className="mt-1 text-sm font-semibold text-cream">Your hands</p>
               </div>
             </div>
-            <div className="relative mt-5 hidden grid-cols-[auto_1fr] gap-x-4 gap-y-3 text-sm lg:grid">
+            <div className="relative mt-[var(--space-5)] hidden grid-cols-[auto_1fr] gap-x-[var(--space-4)] gap-y-[var(--space-3)] text-sm lg:grid">
               <span className="mono text-orange">01</span>
               <span className="text-cream/80">You order from where you&apos;re sitting.</span>
               <span className="mono text-orange">02</span>
@@ -127,12 +127,12 @@ export function WelcomeSplash() {
       </section>
 
       <section aria-labelledby="how-it-works-heading">
-        <div className="flex items-end justify-between gap-4 border-b border-line pb-4">
+        <div className="flex items-end justify-between gap-[var(--space-4)] border-b border-line pb-[var(--space-4)]">
           <div>
             <h2 id="how-it-works-heading" className="font-display text-[1.6rem] leading-none text-navy sm:text-[1.85rem]">
               The line you want to be in
             </h2>
-            <p className="mt-2 max-w-[60ch] text-[14px] leading-relaxed text-label-muted sm:text-[15px]">
+            <p className="mt-[var(--space-2)] max-w-[60ch] text-[14px] leading-relaxed text-label-muted sm:text-[15px]">
               Six quick moves from your seat to your hands.
             </p>
           </div>
@@ -141,9 +141,9 @@ export function WelcomeSplash() {
           </span>
         </div>
 
-        <ol className="mt-5 grid gap-x-5 gap-y-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-8">
+        <ol className="mt-[var(--space-5)] grid gap-x-[var(--space-5)] gap-y-[var(--space-6)] sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-[var(--space-8)] lg:gap-y-[var(--space-8)]">
           {STEPS.map((step, index) => (
-            <li key={step.title} className="grid grid-cols-[2.75rem_1fr] gap-x-3">
+            <li key={step.title} className="grid grid-cols-[2.75rem_1fr] gap-x-[var(--space-3)]">
               <span
                 className={`mono flex h-11 w-11 items-center justify-center rounded-full border text-[12px] font-bold ${
                   index === STEPS.length - 1
@@ -156,7 +156,7 @@ export function WelcomeSplash() {
               </span>
               <div className="pt-0.5">
                 <h3 className="text-[16px] leading-tight text-navy">{step.title}</h3>
-                <p className="mt-1.5 max-w-[32ch] text-[14px] leading-relaxed text-label-muted">
+                <p className="mt-[var(--space-2)] max-w-[32ch] text-[14px] leading-relaxed text-label-muted">
                   {step.body}
                 </p>
               </div>

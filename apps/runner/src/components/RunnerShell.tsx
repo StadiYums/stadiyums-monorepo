@@ -49,7 +49,7 @@ export function RunnerShell({ title, description, children }: RunnerShellProps) 
   return (
     <>
       <BrandHeader context={context} trailing={onlineBadge} />
-      <main className="mx-auto min-h-full w-full max-w-[520px] px-4 pb-[calc(6.5rem+env(safe-area-inset-bottom))] pt-5">
+      <main className="mx-auto min-h-full w-full max-w-[520px] px-[var(--space-page-inline)] pb-[var(--space-page-block-with-dock)] pt-[var(--space-page-block)]">
         {employeeId ? (
           <div className="mb-5 flex items-center justify-between gap-3 rounded-lg border border-line bg-surface-white px-4 py-3">
             <div className="min-w-0">

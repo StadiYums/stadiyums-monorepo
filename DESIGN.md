@@ -46,12 +46,21 @@ rounded:
   xl: "14px"
   pill: "100px"
 spacing:
-  xs: "6px"
-  sm: "12px"
-  md: "16px"
-  lg: "22px"
-  xl: "24px"
-  page-gutter: "20px"
+  base: "4px"
+  1: "4px"
+  2: "8px"
+  3: "12px"
+  4: "16px"
+  5: "20px"
+  6: "24px"
+  8: "32px"
+  10: "40px"
+  12: "48px"
+  16: "64px"
+  page-inline: "clamp(20px, 3vw, 40px)"
+  page-block: "clamp(24px, 3vw, 40px)"
+  page-block-with-dock: "64px + safe-area bottom"
+  section: "clamp(32px, 5vw, 64px)"
 components:
   button-primary:
     backgroundColor: "{colors.surface-white}"
@@ -78,7 +87,7 @@ components:
     backgroundColor: "{colors.surface-white}"
     textColor: "{colors.ink}"
     rounded: "{rounded.xl}"
-    padding: "{spacing.lg}"
+    padding: "{spacing.6}"
   input-field:
     backgroundColor: "{colors.cream}"
     textColor: "{colors.navy}"
@@ -111,6 +120,25 @@ This system explicitly rejects generic SaaS landing patterns and fast-food deliv
 - Monospace for anything operational (seats, prices, order IDs, badges)
 - Flat elevation: borders and background tints, almost no shadows
 - Scoreboard density: high contrast, chunky tap targets, status at a glance
+
+### Spacing Contract
+
+`@stadiyums/ui/src/globals.css` owns a 4px spacing scale (`--space-1` through
+`--space-16`). Use those tokens for local component rhythm; do not introduce
+one-off padding values.
+
+Page-level layouts use semantic roles so every app shares the same outer rhythm:
+
+- `--space-header-block-start` / `--space-header-block-end` keep the brand block
+  clear of browser chrome and give the wordmark deliberate breathing room.
+- `--space-page-inline` (`20px`–`40px`) and `--space-page-block` (`24px`–`40px`)
+  define the page inset at every viewport.
+- `--space-page-block-with-dock` reserves the 64px bottom rhythm and the safe
+  area for surfaces with a fixed cart or action dock.
+- `--space-section` (`32px`–`64px`) separates major content groups.
+
+Use `gap` for sibling rhythm and semantic roles for shell padding. A new app or
+surface should inherit these tokens before adding a layout-specific exception.
 
 ## 2. Colors: The Game-Day Palette
 

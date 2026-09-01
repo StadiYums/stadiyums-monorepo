@@ -16,8 +16,10 @@ export function FanOperateLayout({
     <div className="flex min-h-full flex-col bg-cream">
       <BrandHeader context={PLATFORM_HEADER_CONTEXT} tagline={PLATFORM_TAGLINE} />
       <div
-        className={`mx-auto w-full flex-1 px-5 pb-[calc(2rem+env(safe-area-inset-bottom))] pt-5 sm:px-6 sm:pt-6 md:pt-8 ${
-          width === "wide" ? "max-w-[1240px] lg:px-10" : "max-w-[520px] pb-[calc(6rem+env(safe-area-inset-bottom))]"
+        className={`mx-auto w-full flex-1 px-[var(--space-page-inline)] pt-[var(--space-page-block)] ${
+          width === "wide"
+            ? "max-w-[1240px] pb-[calc(var(--space-page-block)+env(safe-area-inset-bottom))]"
+            : "max-w-[520px] pb-[var(--space-page-block-with-dock)]"
         } ${className}`}
       >
         {children}

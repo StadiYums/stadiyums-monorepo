@@ -18,6 +18,26 @@
   --input-bg: #f7f5f0;
   --radius: 16px;
 
+  /* Spacing primitives: 4px base, used by semantic layout roles below. */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Layout roles: use these instead of one-off page and shell padding. */
+  --space-header-block-start: calc(var(--space-6) + env(safe-area-inset-top));
+  --space-header-block-end: var(--space-5);
+  --space-page-inline: clamp(1.25rem, 3vw, 2.5rem);
+  --space-page-block: clamp(1.5rem, 3vw, 2.5rem);
+  --space-page-block-with-dock: calc(var(--space-16) + env(safe-area-inset-bottom));
+  --space-section: clamp(var(--space-8), 5vw, var(--space-16));
+
   /* Semantic aliases */
   --color-surface: var(--surface-white);
   --color-surface-page: var(--cream);
@@ -67,6 +87,10 @@
   --radius-lg: 16px;
   --radius-xl: 16px;
   --radius-pill: 100px;
+  --spacing-page-inline: var(--space-page-inline);
+  --spacing-page-block: var(--space-page-block);
+  --spacing-page-block-with-dock: var(--space-page-block-with-dock);
+  --spacing-section: var(--space-section);
 }
 
 * {
