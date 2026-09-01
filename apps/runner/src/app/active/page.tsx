@@ -10,7 +10,7 @@ export default function ActivePage() {
       description="Keep your next handoff visible while you move through the bowl."
     >
       <Card className="mt-8 border-2 border-navy">
-        <SectionLabel>Current order</SectionLabel>
+        <SectionLabel variant="action">Current order</SectionLabel>
         <p className="mt-3 text-base font-medium text-ink">
           No active delivery right now. Your next claimed order will appear here with its handoff steps.
         </p>

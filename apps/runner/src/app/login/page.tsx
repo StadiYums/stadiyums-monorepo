@@ -24,13 +24,9 @@ export default function LoginPage() {
   };
 
   return (
-    <RunnerShell
-      eyebrow="StadiYums Runner"
-      title="Sign in"
-      description="Use your assigned employee credentials to start a shift."
-    >
+    <RunnerShell title="Sign in" description="Use your assigned employee credentials to start a shift.">
       <Card className="mt-8 border-2 border-navy">
-        <SectionLabel>Credentials</SectionLabel>
+        <SectionLabel variant="action">Credentials</SectionLabel>
         <div className="mt-4 flex flex-col gap-4">
           <Input
             label="Employee ID"

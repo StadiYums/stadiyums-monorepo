@@ -22,7 +22,7 @@ export default function CheckInPage() {
       description="Choose the area you are authorized to cover today."
     >
       <Card className="mt-8 border-2 border-navy">
-        <SectionLabel>Select zone</SectionLabel>
+        <SectionLabel variant="action">Select zone</SectionLabel>
         <ul className="mt-4 flex flex-col gap-3">
           {ZONES.map((option) => {
             const selected = zone?.id === option.id;

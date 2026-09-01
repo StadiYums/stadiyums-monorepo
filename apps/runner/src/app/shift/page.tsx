@@ -19,7 +19,7 @@ export default function ShiftPage() {
         <RunnerStats />
       </div>
       <Card className="border-2 border-navy">
-        <SectionLabel>Session</SectionLabel>
+        <SectionLabel variant="action">Session</SectionLabel>
         <p className="mt-3 text-base font-semibold text-ink">
           Runner {employeeId}
         </p>

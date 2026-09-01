@@ -101,7 +101,7 @@ export function OrderQueue() {
               <StatusBadge status={order.status} label={statusLabel(order.status)} />
             </div>
             <div className="mt-4 flex items-center justify-between gap-3 border-t border-line pt-3">
-              <p className="min-w-0 text-sm font-semibold text-ink">{itemsSummary}</p>
+              <p className="min-w-0 text-sm font-semibold text-[#5A5348]">{itemsSummary}</p>
               <p className="mono shrink-0 text-[11px] font-bold text-label-muted">
                 {itemCount} {itemCount === 1 ? "item" : "items"}
               </p>

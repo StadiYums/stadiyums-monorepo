@@ -14,7 +14,7 @@ export default function QueuePage() {
       <section className="mt-6 rounded-xl border border-line bg-surface-white p-4" aria-labelledby="availability-heading">
         <div className="flex items-center justify-between gap-3">
           <div>
-            <SectionLabel>Shift status</SectionLabel>
+            <SectionLabel variant="action">Shift status</SectionLabel>
             <h2 id="availability-heading" className="mt-2 text-base font-bold text-navy">
               {isAvailable ? "Listening for orders" : "Taking a break"}
             </h2>
@@ -39,7 +39,7 @@ export default function QueuePage() {
         <RunnerStats />
         <div className="flex items-end justify-between gap-3">
           <div>
-            <SectionLabel>Ready orders</SectionLabel>
+            <SectionLabel variant="action">Ready orders</SectionLabel>
             <h2 className="mt-2 font-display text-xl text-navy">Choose your next run</h2>
           </div>
           <span className="mono text-[10px] font-bold uppercase tracking-[0.06em] text-label-muted">Live queue</span>
