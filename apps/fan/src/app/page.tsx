@@ -1,44 +1,35 @@
 "use client";
 
 import { useEffect } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FanOperateLayout } from "../components/FanOperateLayout";
-import { SeatForm } from "../components/SeatForm";
+import { WelcomeSplash } from "../components/WelcomeSplash";
 import { useFan } from "../providers/FanProvider";
 
 export default function HomePage() {
   const router = useRouter();
-  const { activeOrderId, hasSeat } = useFan();
+  const { activeOrderId, sessionReady } = useFan();
 
   useEffect(() => {
+    if (!sessionReady) {
+      return;
+    }
     if (activeOrderId) {
       router.replace("/tracker");
     }
-  }, [activeOrderId, router]);
+  }, [activeOrderId, router, sessionReady]);
 
-  if (activeOrderId) {
+  if (!sessionReady || activeOrderId) {
     return (
-      <FanOperateLayout>
+      <FanOperateLayout width="wide">
         <p className="text-sm text-label-muted">Opening your live order tracker…</p>
       </FanOperateLayout>
     );
   }
 
   return (
-    <FanOperateLayout>
-      <SeatForm />
-      {hasSeat ? (
-        <p className="mt-4 text-center text-sm text-ink/70">
-          Seat already set.{" "}
-          <Link
-            href="/order"
-            className="font-semibold text-orange-dim underline-offset-2 hover:underline"
-          >
-            Continue to order
-          </Link>
-        </p>
-      ) : null}
+    <FanOperateLayout width="wide">
+      <WelcomeSplash />
     </FanOperateLayout>
   );
 }

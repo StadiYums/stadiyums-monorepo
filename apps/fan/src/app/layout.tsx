@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Archivo_Black, Inter, Space_Mono } from "next/font/google";
-import { AppShell, ThemeProvider, VendorToggle } from "@stadiyums/ui";
+import { AppShell, ThemeProvider } from "@stadiyums/ui";
 import { FanProvider } from "../providers/FanProvider";
 import "./globals.css";
 
@@ -38,9 +38,10 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <FanProvider>
-            <AppShell width="mobile">{children}</AppShell>
+            <AppShell width="full" tone="operate">
+              {children}
+            </AppShell>
           </FanProvider>
-          {process.env.NODE_ENV === "development" ? <VendorToggle /> : null}
         </ThemeProvider>
       </body>
     </html>
