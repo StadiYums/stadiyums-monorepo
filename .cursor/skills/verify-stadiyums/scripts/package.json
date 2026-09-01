@@ -1,8 +1,0 @@
-{
-  "name": "@stadiyums/verify-scripts",
-  "private": true,
-  "type": "module",
-  "dependencies": {
-    "playwright": "^1.50.1"
-  }
-}
