@@ -57,3 +57,24 @@ Required consistency pass:
 
 See `docs/design/review-standards.md` for the reviewer checklist and reporting
 format.
+
+### Change design: redesign from first principles
+
+Do not bolt a new requirement onto the nearest existing component. Before making
+an implementation change, ask: **if this requirement had been known on day one,
+what would this product, flow, or shared primitive look like?** Build toward that
+answer incrementally while preserving confirmed product truth and working user
+flows.
+
+Apply the change across every affected layer:
+
+1. Read the surrounding surface, shared primitives, tokens, and design rationale
+   before editing.
+2. Re-evaluate the information hierarchy, spacing, interaction sequence, and
+   responsive behavior—not only the local JSX or CSS declaration.
+3. Put recurring decisions in `@stadiyums/ui` or `DESIGN.md`; do not duplicate a
+   new local convention across apps.
+4. Update types, documentation, examples, and review criteria when the new
+   principle changes how future work should be done.
+5. State any intentional compromise in the handoff. A quick patch is acceptable
+   only when it is explicitly scoped as temporary and its follow-up is recorded.
