@@ -106,6 +106,12 @@ body {
   line-height: 1.5;
 }
 
+.stadiyums-brand-header {
+  padding-block-start: var(--space-header-block-start);
+  padding-block-end: var(--space-header-block-end);
+  padding-inline: var(--space-page-inline);
+}
+
 h1,
 h2,
 h3 {
