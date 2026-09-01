@@ -37,18 +37,22 @@ export function fanUrl() {
   return process.env.FAN_URL ?? `http://127.0.0.1:${fanPort()}`;
 }
 
+export function stripQuotes(value) {
+  return value.trim().replace(/^["']|["']$/g, "");
+}
+
 export function readDatabaseUrl() {
   if (process.env.DATABASE_URL?.trim()) {
-    return process.env.DATABASE_URL.trim();
+    return stripQuotes(process.env.DATABASE_URL);
   }
   const runStateUrl = join(runDir(), "database.url");
   if (existsSync(runStateUrl)) {
-    return readFileSync(runStateUrl, "utf8").trim();
+    return stripQuotes(readFileSync(runStateUrl, "utf8"));
   }
   const envPath = join(REPO_ROOT, ".env.local");
   if (!existsSync(envPath)) {
     return null;
   }
   const match = readFileSync(envPath, "utf8").match(/^DATABASE_URL=(.+)$/m);
-  return match?.[1]?.trim() ?? null;
+  return match?.[1] ? stripQuotes(match[1]) : null;
 }

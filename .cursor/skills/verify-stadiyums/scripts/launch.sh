@@ -49,11 +49,11 @@ ensure_fan_env() {
 bootstrap_database() {
   # shellcheck disable=SC1091
   source "$SCRIPT_DIR/bootstrap-db.sh"
-  export DATABASE_URL
+  resolve_database_url
   (
     cd "$REPO_ROOT"
-    pnpm db:migrate
-    pnpm db:seed
+    DATABASE_URL="${DATABASE_URL:-}" pnpm db:migrate
+    DATABASE_URL="${DATABASE_URL:-}" pnpm db:seed
   )
 }
 
